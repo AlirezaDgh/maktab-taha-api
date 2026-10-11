@@ -49,7 +49,7 @@ namespace MaktabTaha.WebApi.Controllers
             return Ok(await Mediator.Send(new GetPersonSingleCommand { Id = id }));
         }
 
-        [HttpGet]
+        [HttpGet("/CasePerson")]
         public async Task<IActionResult> GetCasePerson([FromQuery] SearchCasePersonListDTO filter)
         {
             return Ok(await Mediator.Send(new GetCasePersonListCommand { Filters = filter }));

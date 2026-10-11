@@ -10,5 +10,6 @@ namespace MaktabTaha.Domain.Entites.BaseEntities
     public class Relation : BaseEntity<int>
     {
         public string RelationName { get; set; }
+        public List<CasePerson> CasePersons { get; set; } = new List<CasePerson>();
     }
 }

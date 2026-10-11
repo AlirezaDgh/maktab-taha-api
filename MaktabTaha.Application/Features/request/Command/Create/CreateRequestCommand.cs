@@ -22,8 +22,7 @@ namespace MaktabTaha.Application.Features.request.Command.Create
 
         public int HouseHeadStatusId { get; set; }
 
-        public string Gender { get; set; }
-
+        public int GenderId { get; set; }
         public int RefererId { get; set; }
 
         public int NationaltyId { get; set; }

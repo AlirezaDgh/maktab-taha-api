@@ -29,7 +29,8 @@ namespace MaktabTaha.Application.DTO_s.Requests.List
 
         public string? HouseHeadStatusTitle { get; set; }
 
-        public string? Gender { get; set; }
+        public int? GenderId { get; set; }
+        public string? GenderTitle { get; set; }
 
         public int RefererId { get; set; }
 

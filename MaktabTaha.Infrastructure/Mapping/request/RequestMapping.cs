@@ -23,10 +23,8 @@ namespace MaktabTaha.Infrastructure.Mapping.initialRequest
 
             builder.Property(x => x.ClientLastName);
 
-            builder.Property(x => x.Gender);
-
             builder.Property(x => x.Address);
-
+            builder.Property(x => x.CityId);
             builder.Property(x => x.MobileNumber);
 
             builder.Property(x => x.HomeNumber);
@@ -93,6 +91,13 @@ namespace MaktabTaha.Infrastructure.Mapping.initialRequest
                 .WithMany()
                 .HasForeignKey(x => x.RequestStatusId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Gender
+            builder.Property(x => x.GenderId);
+            builder.HasOne(x => x.Gender)
+                .WithMany()
+                .HasForeignKey(x => x.GenderId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

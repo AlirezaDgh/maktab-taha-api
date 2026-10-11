@@ -92,7 +92,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 query = query.Where(x => x.FirstName != null && x.FirstName.Contains(firstName));
             }
 
-            if (string.IsNullOrWhiteSpace(filters.LastName))
+            if (!string.IsNullOrWhiteSpace(filters.LastName))
             {
                 var lastName = filters.LastName.Trim();
                 query = query.Where(x => x.LastName != null && x.LastName.Contains(lastName));

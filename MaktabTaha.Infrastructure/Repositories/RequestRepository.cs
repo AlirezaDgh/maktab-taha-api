@@ -107,8 +107,10 @@ namespace MaktabTaha.Infrastructure.Repositories
                     HouseHeadStatusId =
                         x.HouseHeadStatusId,
 
-                    Gender =
-                        x.Gender ?? string.Empty,
+                    GenderId = x.GenderId,
+
+                    GenderTitle =
+                        x.Gender.GenderName ?? string.Empty,
 
                     RefererId =
                         x.RefererId,

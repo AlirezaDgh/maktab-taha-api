@@ -16,12 +16,10 @@ namespace MaktabTaha.Application.Features.caseDesc.Query.List
     public class GetCaseListHandler : IRequestHandler<GetCaseListCommand, OperationResult<List<CaseListDTO>>>
     {
         private readonly ICaseRepository _repository;
-        private readonly IMapper _mapper;
 
-        public GetCaseListHandler(ICaseRepository repository, IMapper mapper)
+        public GetCaseListHandler(ICaseRepository repository)
         {
             _repository = repository;
-            _mapper = mapper;
         }
 
         public async Task<OperationResult<List<CaseListDTO>>> Handle(GetCaseListCommand request, CancellationToken cancellationToken)
@@ -29,9 +27,8 @@ namespace MaktabTaha.Application.Features.caseDesc.Query.List
             var operation = new OperationResult<List<CaseListDTO>>();
 
             var cases = await _repository.SearchCaseList(request.Filters);
-            var mappedData = _mapper.Map<List<CaseListDTO>>(cases);
             
-            return operation.Succedded(mappedData);
+            return operation.Succedded(cases);
         }
     }
 }

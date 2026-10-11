@@ -99,17 +99,17 @@ namespace MaktabTaha.Infrastructure.Repositories
                     NationalCode = x.CasePersons
                     .Where(x => x.Relation.RelationName == "سرپرست")
                     .Select(x => x.Person.NationalCode)
-                    .SingleOrDefault() ?? string.Empty,
+                    .FirstOrDefault() ?? string.Empty,
 
                     SupervisorFirstName = x.CasePersons
                     .Where(x => x.Relation.RelationName == "سرپرست")
                     .Select(x => x.Person.FirstName)
-                    .SingleOrDefault() ?? string.Empty,
+                    .FirstOrDefault() ?? string.Empty,
 
                     SupervisorLastName = x.CasePersons
                     .Where(x => x.Relation.RelationName == "سرپرست")
                     .Select(x => x.Person.LastName)
-                    .SingleOrDefault() ?? string.Empty,
+                    .FirstOrDefault() ?? string.Empty,
 
                     HouseHeadStatusId = x.HouseHeadStatusId,
 

@@ -161,25 +161,7 @@ namespace MaktabTaha.Application.Profiles
             CreateMap<CreateCaseCommand, Case>();
             CreateMap<UpdateCaseCommand, Case>();
             CreateMap<Case, CaseSingleDTO>();
-            CreateMap<Case, CaseListDTO>()
-                .ForMember(
-                    dest => dest.NationalCode,
-                    opt => opt.MapFrom(src => src.CasePersons
-                        .Where(cp => cp.Relation.RelationName == "سرپرست")
-                        .Select(cp => cp.Person.NationalCode)
-                        .SingleOrDefault()))
-                .ForMember(
-                    dest => dest.SupervisorFirstName,
-                    opt => opt.MapFrom(src => src.CasePersons
-                        .Where(cp => cp.Relation.RelationName == "سرپرست")
-                        .Select(cp => cp.Person.FirstName)
-                        .SingleOrDefault()))
-                .ForMember(
-                    dest => dest.SupervisorLastName,
-                    opt => opt.MapFrom(src => src.CasePersons
-                        .Where(cp => cp.Relation.RelationName == "سرپرست")
-                        .Select(cp => cp.Person.LastName)
-                        .SingleOrDefault()));
+            
 
             // CasePerosn
             CreateMap<CreateCasePersonCommand, CasePerson>();

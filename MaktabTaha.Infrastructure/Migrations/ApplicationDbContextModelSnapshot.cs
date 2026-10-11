@@ -1366,9 +1366,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GenderId")
+                        .HasColumnType("int");
 
                     b.Property<string>("HomeNumber")
                         .IsRequired()
@@ -1426,6 +1425,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasIndex("AreaId");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("GenderId");
 
                     b.HasIndex("HouseHeadStatusId");
 
@@ -1864,6 +1865,12 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Gender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.HouseHeadStatus", "HouseHeadStatus")
                         .WithMany()
                         .HasForeignKey("HouseHeadStatusId")
@@ -1909,6 +1916,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Area");
 
                     b.Navigation("City");
+
+                    b.Navigation("Gender");
 
                     b.Navigation("HouseHeadStatus");
 

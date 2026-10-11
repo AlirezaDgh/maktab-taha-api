@@ -22,7 +22,8 @@ namespace MaktabTaha.Domain.Entites
         public int HouseHeadStatusId { get; set; }
         public HouseHeadStatus HouseHeadStatus { get; set; }
 
-        public string Gender { get; set; }
+        public int GenderId { get; set; }
+        public Gender Gender { get; set; }
 
         public int RefererId { get; set; }
         public Donor Referer { get; set; }

@@ -21,15 +21,15 @@ namespace MaktabTaha.WebApi.Controllers
         }
 
         [HttpDelete("{CaseNumber}")]
-        public async Task<IActionResult> DeleteCase(string caseNumber)
+        public async Task<IActionResult> DeleteCase(string CaseNumber)
         {
-            return Ok(await Mediator.Send(new DeleteCaseCommand { CaseNumber = caseNumber }));
+            return Ok(await Mediator.Send(new DeleteCaseCommand { CaseNumber = CaseNumber }));
         }
 
         [HttpPut("{CaseNumber}")]
-        public async Task<IActionResult> UpdateCase(string caseNumber, UpdateCaseCommand command)
+        public async Task<IActionResult> UpdateCase(string CaseNumber, UpdateCaseCommand command)
         {
-            if (caseNumber != command.CaseNumber)
+            if (CaseNumber != command.CaseNumber)
             {
                 return BadRequest();
             }
@@ -37,15 +37,15 @@ namespace MaktabTaha.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCaseList(SearchCaseDTO filters)
+        public async Task<IActionResult> GetCaseList([FromQuery] SearchCaseDTO filters)
         {
             return Ok(await Mediator.Send(new GetCaseListCommand { Filters = filters }));
         }
 
         [HttpGet("{CaseNumber}")]
-        public async Task<IActionResult> GetCaseSingle(string caseNumber)
+        public async Task<IActionResult> GetCaseSingle(string CaseNumber)
         {
-            return Ok(await Mediator.Send(new GetSingleCaseCommand { CaseNumber = caseNumber }));
+            return Ok(await Mediator.Send(new GetSingleCaseCommand { CaseNumber = CaseNumber }));
         }
     }
 }
