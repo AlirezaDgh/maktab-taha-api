@@ -15,5 +15,7 @@ namespace MaktabTaha.Domain.Entites
         public Person? Person { get; set; }
         public int? CaseId { get; set; }
         public Case? Case { get; set; }
+        public int? MoshaverehId { get; set; }
+        public Moshavereh? Moshavereh { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace MaktabTaha.Infrastructure.Mapping.caseDesc
             builder.Property(x => x.CreatedDate);
 
             builder.Property(x => x.CaseNumber);
+            builder.HasAlternateKey(x => x.CaseNumber);
 
             builder.Property(x => x.RequestId);
             builder.HasOne(x => x.Request)

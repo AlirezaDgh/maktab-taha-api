@@ -61,7 +61,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 var firstName = filters.SupervisorFirstName.Trim();
                 query = query.Where(x => x.CasePersons
                                                 .Any(x => x.Person.FirstName != null &&
-                                                     x.Relation.RelationName == "سرپرست" &&
+                                                     x.Relation.Id == 1 &&
                                                      x.Person.FirstName.Contains(firstName)));
             }
 
@@ -70,7 +70,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 var lastName = filters.SupervisorLastName.Trim();
                 query = query.Where(x => x.CasePersons
                                                 .Any(x => x.Person.LastName != null &&
-                                                     x.Relation.RelationName == "سرپرست" &&
+                                                     x.Relation.Id == 1 &&
                                                      x.Person.LastName.Contains(lastName)));
             }
 
@@ -86,36 +86,35 @@ namespace MaktabTaha.Infrastructure.Repositories
 
             return await query
                 .OrderByDescending(x => x.CreatedDate)
+                .Select(x => new
+                {
+                    Case = x,
+                    Supervisor = x.CasePersons
+                                        .Where(x => x.Relation.Id == 1)
+                                        .Select(x => x.Person)
+                                        .SingleOrDefault()
+                })
                 .Select(x => new CaseListDTO
                 {
-                    Id = x.Id,
+                    Id = x.Case.Id,
 
-                    CaseNumber = x.CaseNumber ?? string.Empty,
+                    CaseNumber = x.Case.CaseNumber ?? string.Empty,
 
-                    RequestId = x.RequestId,
+                    RequestId = x.Case.RequestId,
 
-                    CreatedAt = x.CreatedDate,
+                    CreatedAt = x.Case.CreatedDate,
 
-                    NationalCode = x.CasePersons
-                    .Where(x => x.Relation.RelationName == "سرپرست")
-                    .Select(x => x.Person.NationalCode)
-                    .FirstOrDefault() ?? string.Empty,
+                    NationalCode = x.Supervisor.NationalCode ?? string.Empty,
 
-                    SupervisorFirstName = x.CasePersons
-                    .Where(x => x.Relation.RelationName == "سرپرست")
-                    .Select(x => x.Person.FirstName)
-                    .FirstOrDefault() ?? string.Empty,
+                    SupervisorFirstName = x.Supervisor.FirstName ?? string.Empty,
 
-                    SupervisorLastName = x.CasePersons
-                    .Where(x => x.Relation.RelationName == "سرپرست")
-                    .Select(x => x.Person.LastName)
-                    .FirstOrDefault() ?? string.Empty,
+                    SupervisorLastName = x.Supervisor.LastName ?? string.Empty,
 
-                    HouseHeadStatusId = x.HouseHeadStatusId,
+                    HouseHeadStatusId = x.Case.HouseHeadStatusId,
 
-                    CaseTypeId = x.CaseTypeId,
+                    CaseTypeId = x.Case.CaseTypeId,
 
-                    PrivatenessStatusId = x.PrivatenessStatusId
+                    PrivatenessStatusId = x.Case.PrivatenessStatusId
                 }).ToListAsync();
         }
     }

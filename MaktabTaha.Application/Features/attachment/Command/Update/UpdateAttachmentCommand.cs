@@ -16,5 +16,7 @@ namespace MaktabTaha.Application.Features.attachment.Command.Update
         public string? AttachmentName { get; set; }
         public IFormFile? Attach { get; set; }
         public int? PersonId { get; set; }
+        public int CaseId { get; set; }
+        public int MoshaverehId { get; set; }
     }
 }

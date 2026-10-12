@@ -36,6 +36,10 @@ using MaktabTaha.Application.DTO_s.casePerson.List;
 using MaktabTaha.Application.DTO_s.casePerson.Single;
 using MaktabTaha.Application.DTO_s.caseDesc.List;
 using MaktabTaha.Application.DTO_s.person.Search;
+using MaktabTaha.Application.Features.moshavereh.Command.Create;
+using MaktabTaha.Application.Features.moshavereh.Command.Update;
+using MaktabTaha.Application.DTO_s.Moshavereh.Single;
+using MaktabTaha.Application.DTO_s.Moshavereh.Update;
 
 namespace MaktabTaha.Application.Profiles
 {
@@ -160,7 +164,6 @@ namespace MaktabTaha.Application.Profiles
             // Case
             CreateMap<CreateCaseCommand, Case>();
             CreateMap<UpdateCaseCommand, Case>();
-            CreateMap<Case, CaseSingleDTO>();
             
 
             // CasePerosn
@@ -168,6 +171,17 @@ namespace MaktabTaha.Application.Profiles
             CreateMap<UpdateCasePersonCommand, CasePerson>();
             CreateMap<CasePerson, CasePersonSingleDTO>();
             CreateMap<CasePerson, CasePersonListDTO>();
+
+
+            // Moshavereh
+            CreateMap<CreateMoshaverehcCommand, Moshavereh>();
+            CreateMap<UpdateMoshaverehCommand, Moshavereh>();
+            CreateMap<Moshavereh, MoshaverehSingleDTO>()
+                .ForMember(dest => dest.MoshaverehDate,
+                            opt => opt.MapFrom(src => src.CreatedDate))
+                .ForMember(dest => dest.Id,
+                            opt => opt.MapFrom(src => src.Id));
+            CreateMap<Moshavereh, UpdateMoshaverehDTO>();
         }
     }
 }

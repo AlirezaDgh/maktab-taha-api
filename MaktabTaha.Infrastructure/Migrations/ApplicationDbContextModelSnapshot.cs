@@ -53,6 +53,9 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("MoshaverehId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("PersonId")
                         .HasColumnType("int");
 
@@ -67,6 +70,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasIndex("CaseId");
 
                     b.HasIndex("CaseId1");
+
+                    b.HasIndex("MoshaverehId");
 
                     b.HasIndex("PersonId");
 
@@ -922,7 +927,7 @@ namespace MaktabTaha.Infrastructure.Migrations
 
                     b.Property<string>("CaseNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CaseStageId")
                         .HasColumnType("int");
@@ -1019,9 +1024,6 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<int>("CaseId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CaseId1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -1037,9 +1039,6 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PersonId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("RelationId")
                         .HasColumnType("int");
 
@@ -1050,11 +1049,7 @@ namespace MaktabTaha.Infrastructure.Migrations
 
                     b.HasIndex("CaseId");
 
-                    b.HasIndex("CaseId1");
-
                     b.HasIndex("PersonId");
-
-                    b.HasIndex("PersonId1");
 
                     b.HasIndex("RelationId");
 
@@ -1103,6 +1098,53 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Donor");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.Moshavereh", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CaseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClientRequestDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MoshaverCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MoshaverExplaination")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MoshaverIdea")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseNumber");
+
+                    b.ToTable("Moshavereh");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Permission", b =>
@@ -1567,6 +1609,10 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .WithMany("Attachments")
                         .HasForeignKey("CaseId1");
 
+                    b.HasOne("MaktabTaha.Domain.Entites.Moshavereh", "Moshavereh")
+                        .WithMany("Attachments")
+                        .HasForeignKey("MoshaverehId");
+
                     b.HasOne("MaktabTaha.Domain.Entites.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
@@ -1577,6 +1623,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .HasForeignKey("PersonId1");
 
                     b.Navigation("Case");
+
+                    b.Navigation("Moshavereh");
 
                     b.Navigation("Person");
                 });
@@ -1678,27 +1726,19 @@ namespace MaktabTaha.Infrastructure.Migrations
             modelBuilder.Entity("MaktabTaha.Domain.Entites.CasePerson", b =>
                 {
                     b.HasOne("MaktabTaha.Domain.Entites.Case", "Case")
-                        .WithMany()
+                        .WithMany("CasePersons")
                         .HasForeignKey("CaseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MaktabTaha.Domain.Entites.Case", null)
-                        .WithMany("CasePersons")
-                        .HasForeignKey("CaseId1");
-
                     b.HasOne("MaktabTaha.Domain.Entites.Person", "Person")
-                        .WithMany()
+                        .WithMany("CasePersons")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MaktabTaha.Domain.Entites.Person", null)
-                        .WithMany("CasePersons")
-                        .HasForeignKey("PersonId1");
-
                     b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Relation", "Relation")
-                        .WithMany()
+                        .WithMany("CasePersons")
                         .HasForeignKey("RelationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1708,6 +1748,18 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Person");
 
                     b.Navigation("Relation");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.Moshavereh", b =>
+                {
+                    b.HasOne("MaktabTaha.Domain.Entites.Case", "Case")
+                        .WithMany()
+                        .HasForeignKey("CaseNumber")
+                        .HasPrincipalKey("CaseNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Case");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Permission", b =>
@@ -1969,11 +2021,21 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("cities");
                 });
 
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.BaseEntities.Relation", b =>
+                {
+                    b.Navigation("CasePersons");
+                });
+
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Case", b =>
                 {
                     b.Navigation("Attachments");
 
                     b.Navigation("CasePersons");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.Moshavereh", b =>
+                {
+                    b.Navigation("Attachments");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Permission", b =>

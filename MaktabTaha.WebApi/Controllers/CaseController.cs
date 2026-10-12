@@ -45,7 +45,7 @@ namespace MaktabTaha.WebApi.Controllers
         [HttpGet("{CaseNumber}")]
         public async Task<IActionResult> GetCaseSingle(string CaseNumber)
         {
-            return Ok(await Mediator.Send(new GetSingleCaseCommand { CaseNumber = CaseNumber }));
+            return Ok(await Mediator.Send(new GetSingleCaseMoshaverehCommand { CaseNumber = CaseNumber }));
         }
     }
 }

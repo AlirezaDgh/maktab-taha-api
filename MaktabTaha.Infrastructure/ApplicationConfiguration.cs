@@ -62,6 +62,7 @@ namespace MaktabTaha.Infrastructure
             services.AddTransient<ICaseRepository, CaseRepository>();
             services.AddTransient<ICaseStageRepository, CaseStageRepository>();
             services.AddTransient<ICasePersonRepository, CasePersonRepository>();
+            services.AddTransient<IMoshaverehRepository, MoshaverehRepository>();
 
 
 

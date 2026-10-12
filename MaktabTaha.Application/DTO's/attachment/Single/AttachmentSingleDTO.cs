@@ -9,8 +9,10 @@ namespace MaktabTaha.Application.DTO_s.attachment.Single
     public class AttachmentSingleDTO
     {
         public int Id { get; set; }
-        public string AttachmentName { get; set; }
+        public string AttachmentType { get; set; }
         public byte[] Attach { get; set; }
         public int PersonId { get; set; }
+        public int CaseId { get; set; }
+        public int MoshaverehId { get; set; }
     }
 }

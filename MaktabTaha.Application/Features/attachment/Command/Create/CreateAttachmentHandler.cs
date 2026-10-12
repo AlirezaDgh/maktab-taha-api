@@ -32,7 +32,7 @@ namespace MaktabTaha.Application.Features.attachment.Command.Create
 
             var attachment = new Attachments
             {
-                AttachmentType = request.AttachmentName,
+                AttachmentType = request.AttachmentType,
                 Attach = memoryStream.ToArray(),
                 PersonId = request.PersonId,
             };
