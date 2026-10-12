@@ -20,10 +20,6 @@ namespace MaktabTaha.Application.Features.caseDesc.Command.Create
         public async Task<OperationResult<Case>> Handle(CreateCaseCommand request, CancellationToken cancellationToken)
         {
             var operation = new OperationResult<Case>();
-            //var person = await _repository.Exists
-            var caseDesc = await _repository.Exists(x => x.CasePersons.Any(x => x.Person.Id == 1));
-
-            if (caseDesc) return operation.Failure("این فرد دارای پرونده است");
 
             var mappedData = _mapper.Map<Case>(request);
             await _repository.Create(mappedData);

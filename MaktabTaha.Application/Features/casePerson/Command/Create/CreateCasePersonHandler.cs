@@ -27,6 +27,12 @@ namespace MaktabTaha.Application.Features.casePerson.Command.Create
         {
             var operation = new OperationResult<CasePerson>();
 
+            var person = await _repository.Exists(x => x.PersonId == CasePerson.PersonId);
+            
+            
+            if (person) return operation.Failure("این فرد در پرونده دیگری وجود دارد");
+
+
             var mappedData = _mapper.Map<CasePerson>(CasePerson);
             await _repository.Create(mappedData);
             return operation.Succedded(mappedData);
