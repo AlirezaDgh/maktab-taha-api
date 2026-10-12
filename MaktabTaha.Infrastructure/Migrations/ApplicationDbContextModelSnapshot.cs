@@ -1753,7 +1753,7 @@ namespace MaktabTaha.Infrastructure.Migrations
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Moshavereh", b =>
                 {
                     b.HasOne("MaktabTaha.Domain.Entites.Case", "Case")
-                        .WithMany()
+                        .WithMany("Moshaverehs")
                         .HasForeignKey("CaseNumber")
                         .HasPrincipalKey("CaseNumber")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2031,6 +2031,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Attachments");
 
                     b.Navigation("CasePersons");
+
+                    b.Navigation("Moshaverehs");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Moshavereh", b =>
