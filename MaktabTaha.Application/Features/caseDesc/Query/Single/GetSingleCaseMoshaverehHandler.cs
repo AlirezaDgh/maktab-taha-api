@@ -34,6 +34,7 @@ namespace MaktabTaha.Application.Features.caseDesc.Query.Single
 
             var caseDto = new CaseMoshaverehSingleDTO
             {
+                Id = caseDesc.Id,
                 SupervisorFirstName = supervisor.FirstName,
                 SupervisorLsatName = supervisor.LastName,
                 HouseHeadStatusId = caseDesc.HouseHeadStatusId,

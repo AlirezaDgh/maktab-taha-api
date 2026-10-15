@@ -32,7 +32,7 @@ namespace MaktabTaha.Application.Features.moshavereh.Command.Update
 
             if (moshavereh == null) return operation.Failure("پیش تحقیق یافت نشد");
 
-            if (moshavereh.Case.CaseStageId != 1) return operation.Failure("پرونده در مرحله مشاوره نمی باشد");
+            if (moshavereh.Case.CaseStageId != 2) return operation.Failure("پرونده در مرحله مشاوره نمی باشد");
 
 
             _mapper.Map(request, moshavereh);

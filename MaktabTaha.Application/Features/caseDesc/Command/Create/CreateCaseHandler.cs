@@ -23,6 +23,7 @@ namespace MaktabTaha.Application.Features.caseDesc.Command.Create
 
             var mappedData = _mapper.Map<Case>(request);
             await _repository.Create(mappedData);
+            
 
             return operation.Succedded(mappedData);
         }

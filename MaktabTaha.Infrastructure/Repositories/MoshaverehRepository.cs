@@ -77,7 +77,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 })
                 .Select(x => new MoshaverehListDTO
                 {
-                    MoshaverehCode = x.Case.Id,
+                    Id = x.Case.Id,
                     CaseNumber = x.Case.CaseNumber,
                     SupervisorFirstName = x.Supervisor.FirstName ?? string.Empty,
                     SupervisorLastName = x.Supervisor.LastName ?? string.Empty,

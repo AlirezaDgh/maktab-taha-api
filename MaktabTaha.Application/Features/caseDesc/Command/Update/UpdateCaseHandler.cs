@@ -30,6 +30,7 @@ namespace MaktabTaha.Application.Features.caseDesc.Command.Update
             if (caseDesc == null) return operation.Failure("یافت نشد");
 
             _mapper.Map(request, caseDesc);
+            caseDesc.UpdatedDate = DateTime.Now;
             _repository.Update(caseDesc);
             return operation.Succedded(caseDesc);
         }

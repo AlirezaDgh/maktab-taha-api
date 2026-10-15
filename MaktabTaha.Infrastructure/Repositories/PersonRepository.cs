@@ -61,6 +61,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new PersonListDTO
                 {
+                    Id = x.Id,
                     NationalCode = x.NationalCode ?? string.Empty,
                     FirstName = x.FirstName ?? string.Empty,
                     LastName = x.LastName ?? string.Empty,

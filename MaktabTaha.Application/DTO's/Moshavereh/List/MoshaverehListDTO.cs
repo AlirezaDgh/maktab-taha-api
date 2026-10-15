@@ -9,7 +9,7 @@ namespace MaktabTaha.Application.DTO_s.Moshavereh.List
 {
     public class MoshaverehListDTO
     {
-        public int MoshaverehCode { get; set; } // Id
+        public int Id { get; set; } 
         public string CaseNumber { get; set; }
         public string SupervisorFirstName { get; set; }
         public string SupervisorLastName { get; set; }

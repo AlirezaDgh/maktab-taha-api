@@ -31,14 +31,11 @@ namespace MaktabTaha.Application.Features.moshavereh.Command.Create
             var caseDesc = await _caseRepository.FirstOrDefault(x => x.CaseNumber == request.CaseNumber);
             if (caseDesc == null) return operation.Failure("پرونده وجود ندارد");
 
-            if (caseDesc.CaseStageId == 1) return operation.Failure("ثبت مشاوره قبلا انجام شده است");
+            if (caseDesc.CaseStageId == 2) return operation.Failure("ثبت مشاوره قبلا انجام شده است");
 
             var mappedData = _mapper.Map<Moshavereh>(request);
 
             await _repository.Create(mappedData); 
-
-            caseDesc.CaseStageId = 1;
-            await _caseRepository.Update(caseDesc);
 
             return operation.Succedded(mappedData);
 

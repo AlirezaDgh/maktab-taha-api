@@ -9,6 +9,7 @@ namespace MaktabTaha.Application.DTO_s.caseDesc.Single
 {
     public class CaseMoshaverehSingleDTO
     {
+        public int Id { get; set; }
         public string SupervisorFirstName { get; set; }
         public string SupervisorLsatName { get; set; }
         public int HouseHeadStatusId { get; set; }
