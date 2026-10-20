@@ -23,15 +23,15 @@ namespace MaktabTaha.Application.Features.casePerson.Command.Update
             _mapper = mapper;
         }
 
-        public async Task<OperationResult<CasePerson>> Handle(UpdateCasePersonCommand CasePerson, CancellationToken cancellationToken)
+        public async Task<OperationResult<CasePerson>> Handle(UpdateCasePersonCommand request, CancellationToken cancellationToken)
         {
             var operation = new OperationResult<CasePerson>();
 
-            var initialCasePerson = await _repository.FirstOrDefault(x => x.Id == CasePerson.Id);
-            if (initialCasePerson == null) return operation.Failure("درخواست اولیه موجود نمیباشد");
-            _mapper.Map(CasePerson, initialCasePerson);
-            await _repository.Update(initialCasePerson);
-            return operation.Succedded(initialCasePerson);
+            var casePerson = await _repository.FirstOrDefault(x => x.Id == request.Id);
+            if (casePerson == null) return operation.Failure("موجود نمیباشد");
+            _mapper.Map(request, casePerson);
+            await _repository.Update(casePerson);
+            return operation.Succedded(casePerson);
         }
     }
 }

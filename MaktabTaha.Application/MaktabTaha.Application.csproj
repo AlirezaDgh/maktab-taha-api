@@ -19,7 +19,6 @@
   <ItemGroup>
     <Folder Include="DTO%27s\caseDesc\Create\" />
     <Folder Include="DTO%27s\caseDesc\Update\" />
-    <Folder Include="DTO%27s\casePerson\Create\" />
     <Folder Include="DTO%27s\casePerson\Update\" />
     <Folder Include="DTO%27s\Moshavereh\Create\" />
     <Folder Include="Features\baseEntities\area\Command\Create\" />

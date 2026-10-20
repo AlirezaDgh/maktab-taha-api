@@ -1,4 +1,5 @@
-﻿using MaktabTaha.Application.Helpers;
+﻿using MaktabTaha.Application.DTO_s.casePerson.Create;
+using MaktabTaha.Application.Helpers;
 using MaktabTaha.Domain.Entites;
 using MediatR;
 using System;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace MaktabTaha.Application.Features.casePerson.Command.Create
 {
-    public class CreateCasePersonCommand : IRequest<OperationResult<CasePerson>>
+    public class CreateCasePersonCommand : IRequest<OperationResult<List<CasePerson>>>
     {
         public int CaseId { get; set; }
-        public int PersonId { get; set; }
-        public int RelationId { get; set; }
-        public int IsDependent { get; set; }
+
+        public List<CreateCasePersonDTO> PersonsInCase { get; set; } = new List<CreateCasePersonDTO>();
+
 
     }
 }
