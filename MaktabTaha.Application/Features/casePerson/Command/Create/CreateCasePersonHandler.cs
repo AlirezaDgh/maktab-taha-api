@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using MaktabTaha.Application.Features.casePerson.Command.Create;
 using MaktabTaha.Application.Helpers;
+using MaktabTaha.Application.Interfaces;
 using MaktabTaha.Application.Interfaces.Repositories;
 using MaktabTaha.Domain.Entites;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ namespace MaktabTaha.Application.Features.casePerson.Command.Create
     {
         private readonly ICasePersonRepository _repository;
         private readonly ICaseRepository _caseRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public CreateCasePersonHandler(ICasePersonRepository repository, IMapper mapper, ICaseRepository caseRepository)
@@ -38,16 +41,20 @@ namespace MaktabTaha.Application.Features.casePerson.Command.Create
                 return operation.Failure("پرونده وجود ندارد");
             }
 
-            if (request.PersonsInCase == null)
+            var duplicatePerson = request.PersonsInCase
+                .GroupBy(x => x.PersonId)
+                .Any(group => group.Count() > 1);
+
+            if (duplicatePerson)
             {
-                return operation.Failure("لیست اشخاص خالی است");
+                return operation.Failure("هر شخص فقط یکبار میتواند در پرونده ثبت شود.");
             }
 
             var result = new List<CasePerson>();
 
-            foreach(var item in request.PersonsInCase)
+            foreach (var item in request.PersonsInCase)
             {
-                var exists = await _repository.Exists(x => x.CaseId == request.CaseId 
+                var exists = await _repository.Exists(x => x.CaseId == request.CaseId
                                                     && x.PersonId == item.PersonId);
 
                 if (exists)
@@ -68,6 +75,7 @@ namespace MaktabTaha.Application.Features.casePerson.Command.Create
             }
 
             return operation.Succedded(result);
+
         }
     }
 }

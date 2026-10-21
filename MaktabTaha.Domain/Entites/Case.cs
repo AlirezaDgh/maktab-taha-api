@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MaktabTaha.Domain.Entites
@@ -54,6 +55,7 @@ namespace MaktabTaha.Domain.Entites
         public List<Attachments> Attachments { get; set; } = new List<Attachments>();
 
         // اعضای تحت تکفل یا سرپرست
+        [JsonIgnore]
         public List<CasePerson> CasePersons { get; set; } = new List<CasePerson>();
 
         // مرحله پرونده

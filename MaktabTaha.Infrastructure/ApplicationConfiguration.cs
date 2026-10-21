@@ -1,4 +1,5 @@
-﻿using MaktabTaha.Application.Interfaces.Repositories;
+﻿using MaktabTaha.Application.Interfaces;
+using MaktabTaha.Application.Interfaces.Repositories;
 using MaktabTaha.Application.Interfaces.Repositories.BaseEntities;
 using MaktabTaha.Application.Profiles;
 using MaktabTaha.Domain.Common;
@@ -30,6 +31,8 @@ namespace MaktabTaha.Infrastructure
             services.AddScoped<ITokenServices, TokenService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             //Base Entities
 
             services.AddTransient<IAreaRepository, AreaRepository>();
@@ -59,9 +62,9 @@ namespace MaktabTaha.Infrastructure
             services.AddTransient<IDependancyStatusRepository, DependancyStatusRepository>();
             services.AddTransient<IGenderRepository, GenderRepository>();
             services.AddTransient<IMaritalStatusRepository, MaritalStatusRepository>();
-            services.AddTransient<ICaseRepository, CaseRepository>();
+            services.AddScoped<ICaseRepository, CaseRepository>();
             services.AddTransient<ICaseStageRepository, CaseStageRepository>();
-            services.AddTransient<ICasePersonRepository, CasePersonRepository>();
+            services.AddScoped<ICasePersonRepository, CasePersonRepository>();
             services.AddTransient<IMoshaverehRepository, MoshaverehRepository>();
 
 

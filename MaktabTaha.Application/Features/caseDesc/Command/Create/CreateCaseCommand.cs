@@ -1,4 +1,5 @@
-﻿using MaktabTaha.Application.Helpers;
+﻿using MaktabTaha.Application.DTO_s.casePerson.Create;
+using MaktabTaha.Application.Helpers;
 using MaktabTaha.Domain.Entites;
 using MaktabTaha.Domain.Entites.BaseEntities;
 using MediatR;
@@ -42,5 +43,9 @@ namespace MaktabTaha.Application.Features.caseDesc.Command.Create
 
         // وضعیت فعال
         public CaseActiveStatus ActiveStatus { get; set; }
+
+
+
+        public List<CreateCasePersonDTO> PersonsInCase { get; set; } = new List<CreateCasePersonDTO>();
     }
 }

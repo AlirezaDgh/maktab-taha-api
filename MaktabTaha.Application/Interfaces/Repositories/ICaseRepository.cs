@@ -12,5 +12,7 @@ namespace MaktabTaha.Application.Interfaces.Repositories
     public interface ICaseRepository : IGenericRepository<int, Case>
     {
         Task<List<CaseListDTO>> SearchCaseList(SearchCaseDTO filters);
+
+        Task<Case> CreateNoSave(Case entity);
     }
 }

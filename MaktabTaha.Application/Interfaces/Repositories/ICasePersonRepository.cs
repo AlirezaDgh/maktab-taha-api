@@ -9,5 +9,6 @@ namespace MaktabTaha.Application.Interfaces.Repositories
 {
     public interface ICasePersonRepository : IGenericRepository<int, CasePerson>
     {
+        Task<CasePerson> CreateNoSave(CasePerson entity);
     }
 }
