@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,14 @@ namespace MaktabTaha.Infrastructure.Repositories
         {
             await _context.CaseBNF.AddAsync(entity);
             return entity;
+        }
+
+        public async Task<Case> GetByCaseNumberWithPersons(string caseNumber)
+        {
+            return await _context.CaseBNF
+                .Include(x => x.CasePersons)
+                    .ThenInclude(x => x.Person)
+                .FirstOrDefaultAsync(x => x.CaseNumber == caseNumber);
         }
 
         public async Task<List<CaseListDTO>> SearchCaseList(SearchCaseDTO filters)

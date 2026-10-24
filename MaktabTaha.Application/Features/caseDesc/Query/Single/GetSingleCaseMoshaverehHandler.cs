@@ -2,6 +2,7 @@
 using MaktabTaha.Application.DTO_s.caseDesc.Single;
 using MaktabTaha.Application.Helpers;
 using MaktabTaha.Application.Interfaces.Repositories;
+using MaktabTaha.Domain.Entites;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,23 +27,30 @@ namespace MaktabTaha.Application.Features.caseDesc.Query.Single
         {
             var operation = new OperationResult<CaseMoshaverehSingleDTO>();
 
-            var caseDesc = await _repository.FirstOrDefault(x => x.CaseNumber == request.CaseNumber);
-            if (caseDesc == null)
-                return operation.Failure("یافت نشد");
-
-            var supervisor = caseDesc.CasePersons.FirstOrDefault(x => x.Relation.Id == 1).Person;
-
-            var caseDto = new CaseMoshaverehSingleDTO
+            try
             {
-                Id = caseDesc.Id,
-                SupervisorFirstName = supervisor.FirstName,
-                SupervisorLsatName = supervisor.LastName,
-                HouseHeadStatusId = caseDesc.HouseHeadStatusId,
-                CaseStageId = caseDesc.CaseStageId
+                var caseDesc = await _repository.GetByCaseNumberWithPersons(request.CaseNumber);
+                if (caseDesc == null)
+                    return operation.Failure("یافت نشد");
 
-            };
+                var supervisor = caseDesc.CasePersons.SingleOrDefault(x => x.RelationId == 1).Person;
 
-            return operation.Succedded(caseDto);
+                var caseDto = new CaseMoshaverehSingleDTO
+                {
+                    Id = caseDesc.Id,
+                    SupervisorFirstName = supervisor.FirstName,
+                    SupervisorLsatName = supervisor.LastName,
+                    HouseHeadStatusId = caseDesc.HouseHeadStatusId,
+                    CaseStageId = caseDesc.CaseStageId
+                };
+
+                return operation.Succedded(caseDto);
+
+            }
+            catch (Exception ex)
+            {
+                return operation.Failure(ex.Message);
+            }
         }
     }
 }
