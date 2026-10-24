@@ -40,6 +40,7 @@ using MaktabTaha.Application.Features.moshavereh.Command.Create;
 using MaktabTaha.Application.Features.moshavereh.Command.Update;
 using MaktabTaha.Application.DTO_s.Moshavereh.Single;
 using MaktabTaha.Application.DTO_s.Moshavereh.Update;
+using MaktabTaha.Application.Features.caseDesc.Query.Single;
 
 namespace MaktabTaha.Application.Profiles
 {
@@ -164,6 +165,7 @@ namespace MaktabTaha.Application.Profiles
             // Case
             CreateMap<CreateCaseCommand, Case>();
             CreateMap<UpdateCaseCommand, Case>();
+            CreateMap<Case, CaseSingleDTO>();
             
 
             // CasePerosn
@@ -171,6 +173,7 @@ namespace MaktabTaha.Application.Profiles
             CreateMap<UpdateCasePersonCommand, CasePerson>();
             CreateMap<CasePerson, CasePersonSingleDTO>();
             CreateMap<CasePerson, CasePersonListDTO>();
+
 
 
             // Moshavereh

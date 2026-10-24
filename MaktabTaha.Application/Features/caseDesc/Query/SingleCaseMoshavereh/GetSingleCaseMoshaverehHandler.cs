@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaktabTaha.Application.Features.caseDesc.Query.Single
+namespace MaktabTaha.Application.Features.caseDesc.Query.SingleCaseMoshavereh
 {
     public class GetSingleCaseMoshaverehHandler : IRequestHandler<GetSingleCaseMoshaverehCommand, OperationResult<CaseMoshaverehSingleDTO>>
     {

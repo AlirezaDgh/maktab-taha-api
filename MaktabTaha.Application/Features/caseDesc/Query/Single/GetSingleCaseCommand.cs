@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace MaktabTaha.Application.Features.caseDesc.Query.Single
 {
-    public class GetSingleCaseMoshaverehCommand : IRequest<OperationResult<CaseMoshaverehSingleDTO>>
+    public class GetSingleCaseCommand : IRequest<OperationResult<CaseSingleDTO>>
     {
-        public string CaseNumber { get; set; }
+        public int Id { get; set; }
     }
 }

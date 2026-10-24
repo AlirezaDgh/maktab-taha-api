@@ -4,6 +4,7 @@ using MaktabTaha.Application.Features.caseDesc.Command.Delete;
 using MaktabTaha.Application.Features.caseDesc.Command.Update;
 using MaktabTaha.Application.Features.caseDesc.Query.List;
 using MaktabTaha.Application.Features.caseDesc.Query.Single;
+using MaktabTaha.Application.Features.caseDesc.Query.SingleCaseMoshavereh;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,9 +44,15 @@ namespace MaktabTaha.WebApi.Controllers
         }
 
         [HttpGet("{CaseNumber}")]
-        public async Task<IActionResult> GetCaseSingle(string CaseNumber)
+        public async Task<IActionResult> GetCaseMoshaverehSingle(string CaseNumber)
         {
             return Ok(await Mediator.Send(new GetSingleCaseMoshaverehCommand { CaseNumber = CaseNumber }));
+        }
+
+        [HttpGet("by-id/{id}")]
+        public async Task<IActionResult> GetSingleCase(int id)
+        {
+            return Ok(await Mediator.Send(new GetSingleCaseCommand { Id = id }));
         }
     }
 }
