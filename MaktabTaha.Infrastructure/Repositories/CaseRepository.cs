@@ -1,5 +1,6 @@
 ﻿using MaktabTaha.Application.DTO_s.caseDesc.List;
 using MaktabTaha.Application.DTO_s.caseDesc.Search;
+using MaktabTaha.Application.DTO_s.caseDesc.Single;
 using MaktabTaha.Application.Interfaces.Repositories;
 using MaktabTaha.Domain.Entites;
 using Microsoft.EntityFrameworkCore;
@@ -26,12 +27,24 @@ namespace MaktabTaha.Infrastructure.Repositories
             return entity;
         }
 
-        public async Task<Case> GetByCaseNumberWithPersons(string caseNumber)
+        public async Task<CaseMoshaverehSingleDTO> GetCaseMoshaverehSingle(string caseNumber)
         {
             return await _context.CaseBNF
-                .Include(x => x.CasePersons)
-                    .ThenInclude(x => x.Person)
-                .FirstOrDefaultAsync(x => x.CaseNumber == caseNumber);
+                                    .AsNoTracking()
+                                    .Where(x => x.CaseNumber == caseNumber)
+                                    .Select(x => new CaseMoshaverehSingleDTO
+                                    {
+                                        Id = x.Id,
+                                        SupervisorFirstName = x.CasePersons
+                                                                    .Where(x => x.RelationId == 1)
+                                                                    .Select(x => x.Person.FirstName).FirstOrDefault(),
+                                        SupervisorLastName = x.CasePersons
+                                                                    .Where(x => x.RelationId == 1)
+                                                                    .Select(x => x.Person.LastName).FirstOrDefault(),
+                                        HouseHeadStatusId = x.HouseHeadStatusId,
+                                        CaseStageId = x.CaseStageId
+                                    })
+                                    .FirstOrDefaultAsync();
         }
 
         public async Task<List<CaseListDTO>> SearchCaseList(SearchCaseDTO filters)

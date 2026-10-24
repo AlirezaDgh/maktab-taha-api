@@ -1,5 +1,6 @@
 ﻿using MaktabTaha.Application.DTO_s.caseDesc.List;
 using MaktabTaha.Application.DTO_s.caseDesc.Search;
+using MaktabTaha.Application.DTO_s.caseDesc.Single;
 using MaktabTaha.Domain.Entites;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,7 @@ namespace MaktabTaha.Application.Interfaces.Repositories
 
         Task<Case> CreateNoSave(Case entity);
 
-        Task<Case> GetByCaseNumberWithPersons(string caseNumber);
-
+        Task<CaseMoshaverehSingleDTO> GetCaseMoshaverehSingle(string caseNumber);
 
     }
 }

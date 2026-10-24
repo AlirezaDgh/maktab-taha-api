@@ -29,22 +29,11 @@ namespace MaktabTaha.Application.Features.caseDesc.Query.Single
 
             try
             {
-                var caseDesc = await _repository.GetByCaseNumberWithPersons(request.CaseNumber);
-                if (caseDesc == null)
-                    return operation.Failure("یافت نشد");
+                var caseDesc = await _repository.GetCaseMoshaverehSingle(request.CaseNumber);
 
-                var supervisor = caseDesc.CasePersons.SingleOrDefault(x => x.RelationId == 1).Person;
+                if (caseDesc == null) return operation.Failure("پرونده یافت نشد");
 
-                var caseDto = new CaseMoshaverehSingleDTO
-                {
-                    Id = caseDesc.Id,
-                    SupervisorFirstName = supervisor.FirstName,
-                    SupervisorLsatName = supervisor.LastName,
-                    HouseHeadStatusId = caseDesc.HouseHeadStatusId,
-                    CaseStageId = caseDesc.CaseStageId
-                };
-
-                return operation.Succedded(caseDto);
+                return operation.Succedded(caseDesc);
 
             }
             catch (Exception ex)

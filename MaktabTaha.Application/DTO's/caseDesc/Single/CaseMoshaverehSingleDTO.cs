@@ -11,7 +11,7 @@ namespace MaktabTaha.Application.DTO_s.caseDesc.Single
     {
         public int Id { get; set; }
         public string SupervisorFirstName { get; set; }
-        public string SupervisorLsatName { get; set; }
+        public string SupervisorLastName { get; set; }
         public int HouseHeadStatusId { get; set; }
         public int CaseStageId { get; set; }
     }
