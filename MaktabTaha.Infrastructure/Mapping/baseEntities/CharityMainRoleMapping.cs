@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace MaktabTaha.Infrastructure.Mapping.baseEntities
 {
-    public class CharityMainRoleMapping : IEntityTypeConfiguration<CaseType>
+    public class CharityMainRoleMapping : IEntityTypeConfiguration<CharityMainRole>
     {
-        public void Configure(EntityTypeBuilder<CaseType> builder)
+        public void Configure(EntityTypeBuilder<CharityMainRole> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.CaseTypeName);
+            builder.Property(x => x.CharityMainRoleName);
         }
     }
 }

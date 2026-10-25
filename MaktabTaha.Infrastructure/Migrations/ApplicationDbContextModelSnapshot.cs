@@ -47,6 +47,9 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DonorId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -76,6 +79,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasIndex("CaseId");
 
                     b.HasIndex("CaseId1");
+
+                    b.HasIndex("DonorId");
 
                     b.HasIndex("MoshaverehId");
 
@@ -1074,12 +1079,47 @@ namespace MaktabTaha.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
+                    b.Property<string>("AvailableServices")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BirthPlace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CharityJoinDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CharityMainRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CharityReferralSource")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DonorType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EducationLevelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EducationMajor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EducationStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FatherName")
                         .IsRequired()
@@ -1089,23 +1129,94 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("GenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HomeAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomePhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HouseCityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HouseProvinceId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("JobAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("JobPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Lastname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MaritalStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MobileNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NationalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NationalityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReferrerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReligonId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShenasnamehNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CharityMainRoleId");
+
+                    b.HasIndex("EducationLevelId");
+
+                    b.HasIndex("EducationStatusId");
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("HouseCityId");
+
+                    b.HasIndex("HouseProvinceId");
+
+                    b.HasIndex("JobId");
+
+                    b.HasIndex("MaritalStatusId");
+
+                    b.HasIndex("NationalityId");
+
+                    b.HasIndex("ReferrerId");
+
+                    b.HasIndex("ReligonId");
 
                     b.ToTable("Donor");
                 });
@@ -1675,6 +1786,11 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .WithMany("Attachments")
                         .HasForeignKey("CaseId1");
 
+                    b.HasOne("MaktabTaha.Domain.Entites.Donor", "Donor")
+                        .WithMany()
+                        .HasForeignKey("DonorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("MaktabTaha.Domain.Entites.Moshavereh", "Moshavereh")
                         .WithMany("Attachments")
                         .HasForeignKey("MoshaverehId");
@@ -1698,6 +1814,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .HasForeignKey("TahghighId1");
 
                     b.Navigation("Case");
+
+                    b.Navigation("Donor");
 
                     b.Navigation("Moshavereh");
 
@@ -1825,6 +1943,97 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Person");
 
                     b.Navigation("Relation");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.Donor", b =>
+                {
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.CharityMainRole", "CharityMainRole")
+                        .WithMany()
+                        .HasForeignKey("CharityMainRoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.EducationLevel", "EducationLevel")
+                        .WithMany()
+                        .HasForeignKey("EducationLevelId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.EducationStatus", "EducationStatus")
+                        .WithMany()
+                        .HasForeignKey("EducationStatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Gender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.City", "HouseCity")
+                        .WithMany()
+                        .HasForeignKey("HouseCityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Province", "HouseProvince")
+                        .WithMany()
+                        .HasForeignKey("HouseProvinceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Job", "Job")
+                        .WithMany()
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.MaritalStatus", "MaritalStatus")
+                        .WithMany()
+                        .HasForeignKey("MaritalStatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Nationality", "Nationality")
+                        .WithMany()
+                        .HasForeignKey("NationalityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.Donor", "Referrer")
+                        .WithMany()
+                        .HasForeignKey("ReferrerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Religon", "Religon")
+                        .WithMany()
+                        .HasForeignKey("ReligonId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CharityMainRole");
+
+                    b.Navigation("EducationLevel");
+
+                    b.Navigation("EducationStatus");
+
+                    b.Navigation("Gender");
+
+                    b.Navigation("HouseCity");
+
+                    b.Navigation("HouseProvince");
+
+                    b.Navigation("Job");
+
+                    b.Navigation("MaritalStatus");
+
+                    b.Navigation("Nationality");
+
+                    b.Navigation("Referrer");
+
+                    b.Navigation("Religon");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Moshavereh", b =>

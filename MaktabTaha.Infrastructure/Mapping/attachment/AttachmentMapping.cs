@@ -34,6 +34,12 @@ namespace MaktabTaha.Infrastructure.Mapping.attachment
                 .WithMany()
                 .HasForeignKey(x => x.TahghighId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(x => x.DonorId);
+            builder.HasOne(x => x.Donor)
+                .WithMany()
+                .HasForeignKey(x => x.DonorId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
