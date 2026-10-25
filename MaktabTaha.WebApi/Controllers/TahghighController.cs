@@ -1,7 +1,9 @@
-﻿using MaktabTaha.Application.Features.caseDesc.Command.Create;
+﻿using MaktabTaha.Application.DTO_s.tahghigh.Search;
+using MaktabTaha.Application.Features.caseDesc.Command.Create;
 using MaktabTaha.Application.Features.tahghigh.Command.Create;
 using MaktabTaha.Application.Features.tahghigh.Command.Delete;
 using MaktabTaha.Application.Features.tahghigh.Command.Update;
+using MaktabTaha.Application.Features.tahghigh.Query.List;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,6 +33,12 @@ namespace MaktabTaha.WebApi.Controllers
                 return BadRequest();
             }
             return Ok(await Mediator.Send(command));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllTahghighs([FromQuery] SearchTahghighDTO filters)
+        {
+            return Ok(await Mediator.Send(new GetTahghighListCommand { Filters = filters }));
         }
     }
 }

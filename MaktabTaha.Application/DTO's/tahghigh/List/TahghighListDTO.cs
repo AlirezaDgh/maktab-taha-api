@@ -9,20 +9,11 @@ namespace MaktabTaha.Application.DTO_s.tahghigh.List
 {
     public class TahghighListDTO
     {
+        //شماره تحقیق
         public int Id { get; set; }
-        public string TahghighNumber { get; set; }
-
-        // تاریخ تحقیق
-        public DateTime TahghighDate { get; set; } = DateTime.Now;
-
-        // شماره پیش تحقیق
-        public int MoshaverehId { get; set; }
-
-        public string ClientDescription { get; set; }
-        public string FirstMohagheghCode { get; set; }
-        public string SecondMohagheghCode { get; set; }
-
-        public MohagheghIdea MohagheghIdea { get; set; }
-        public string MohagheghDescription { get; set; }
+        public string CaseNumber { get; set; }
+        public string? SupervisorFirstName { get; set; }
+        public string? SupervisorLastName { get; set; }
+        public DateTime TahghighDate { get; set; }
     }
 }
