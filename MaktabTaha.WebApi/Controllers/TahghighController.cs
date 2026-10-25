@@ -4,6 +4,7 @@ using MaktabTaha.Application.Features.tahghigh.Command.Create;
 using MaktabTaha.Application.Features.tahghigh.Command.Delete;
 using MaktabTaha.Application.Features.tahghigh.Command.Update;
 using MaktabTaha.Application.Features.tahghigh.Query.List;
+using MaktabTaha.Application.Features.tahghigh.Query.Single;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,12 @@ namespace MaktabTaha.WebApi.Controllers
         public async Task<IActionResult> GetAllTahghighs([FromQuery] SearchTahghighDTO filters)
         {
             return Ok(await Mediator.Send(new GetTahghighListCommand { Filters = filters }));
+        }
+
+        [HttpGet("by-id/{id}")]
+        public async Task<IActionResult> GetSingleTahghigh(int id)
+        {
+            return Ok(await Mediator.Send(new GetSingleTahghighCommand{ Id = id }));
         }
     }
 }

@@ -44,6 +44,7 @@ using MaktabTaha.Application.Features.caseDesc.Query.Single;
 using MaktabTaha.Application.Features.tahghigh.Command.Create;
 using MaktabTaha.Application.Features.tahghigh.Command.Update;
 using MaktabTaha.Application.DTO_s.tahghigh.Update;
+using MaktabTaha.Application.DTO_s.tahghigh.Single;
 
 namespace MaktabTaha.Application.Profiles
 {
@@ -198,6 +199,7 @@ namespace MaktabTaha.Application.Profiles
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.TahghighDate, opt => opt.Ignore());
             CreateMap<Tahghigh, UpdateTahghighDTO>();
+
         }
     }
 }

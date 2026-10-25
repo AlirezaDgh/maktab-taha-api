@@ -1,5 +1,6 @@
 ﻿using MaktabTaha.Application.DTO_s.tahghigh.List;
 using MaktabTaha.Application.DTO_s.tahghigh.Search;
+using MaktabTaha.Application.DTO_s.tahghigh.Single;
 using MaktabTaha.Domain.Entites;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace MaktabTaha.Application.Interfaces.Repositories
     {
         Task<Tahghigh> FirstOrDefaultWith(string caseNumber);
         Task<List<TahghighListDTO>> GetAllTahghighList(SearchTahghighDTO filters);
+        Task<TahghighSingleDTO> GetTahghighSingle(int id);
     }
 }

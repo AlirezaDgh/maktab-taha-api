@@ -1,5 +1,6 @@
 ﻿using MaktabTaha.Application.DTO_s.tahghigh.List;
 using MaktabTaha.Application.DTO_s.tahghigh.Search;
+using MaktabTaha.Application.DTO_s.tahghigh.Single;
 using MaktabTaha.Application.Interfaces.Repositories;
 using MaktabTaha.Domain.Entites;
 using Microsoft.EntityFrameworkCore;
@@ -92,6 +93,24 @@ namespace MaktabTaha.Infrastructure.Repositories
                     
                     TahghighDate = x.Tahghigh.TahghighDate 
                 }).ToListAsync();
+        }
+
+        public async Task<TahghighSingleDTO> GetTahghighSingle(int id)
+        {
+            return await _context.Tahghigh
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .Select(x => new TahghighSingleDTO
+                {
+                    Id = x.Id,
+                    TahghighDate = x.TahghighDate,
+                    CaseNumber = x.Moshavereh.CaseNumber,
+                    ClientDescription = x.ClientDescription,
+                    FirstMohagheghCode = x.FirstMohagheghCode,
+                    SecondMohagheghCode = x.SecondMohagheghCode,
+                    MohagheghIdea = x.MohagheghIdea,
+                    MohagheghDescription = x.MohagheghDescription
+                }).FirstOrDefaultAsync();
         }
     }
 }
