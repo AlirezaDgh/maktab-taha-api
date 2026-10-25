@@ -12,6 +12,7 @@ namespace MaktabTaha.Application.Features.moshavereh.Command.Create
     public class CreateMoshaverehcCommand : IRequest<OperationResult<Moshavereh>>
     {
         public string CaseNumber { get; set; }
+        public DateTime MoshaverehDate { get; set; }
         public string ClientRequestDescription { get; set; }
         public string MoshaverCode { get; set; }
         public string MoshaverIdea { get; set; }

@@ -172,7 +172,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                         column: x => x.CaseId,
                         principalTable: "Case",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CasePerson_Case_CaseId1",
                         column: x => x.CaseId1,
@@ -183,7 +183,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                         column: x => x.PersonId,
                         principalTable: "Person",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CasePerson_Person_PersonId1",
                         column: x => x.PersonId1,
@@ -194,7 +194,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                         column: x => x.RelationId,
                         principalTable: "Relation",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -289,7 +289,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                 column: "CaseId",
                 principalTable: "Case",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Attachment_Case_CaseId1",

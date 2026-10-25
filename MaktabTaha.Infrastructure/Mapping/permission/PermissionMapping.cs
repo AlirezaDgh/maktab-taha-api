@@ -33,7 +33,7 @@ namespace MaktabTaha.Infrastructure.Mapping.permission
             builder.HasOne(x => x.Parent)
                 .WithMany(x => x.Children)
                 .HasForeignKey(x => x.ParentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Unique Key
             builder.HasIndex(x => x.Key)

@@ -11,7 +11,9 @@ namespace MaktabTaha.Domain.Entites
     public class Moshavereh : BaseEntity<int>
     {
         // مشاوره / پیش‌تحقیق
-        // شماره پیش تحقیق و تاریخ ایجاد در BaseEntity موجود است
+        // شماره پیش تحقیق در BaseEntity موجود است
+
+        public DateTime MoshaverehDate { get; set; } = DateTime.Now;
         public string CaseNumber { get; set; }
         public Case Case { get; set; }
         public string ClientRequestDescription { get; set; }

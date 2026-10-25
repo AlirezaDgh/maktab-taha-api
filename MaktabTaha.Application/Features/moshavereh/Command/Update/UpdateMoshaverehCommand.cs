@@ -14,6 +14,7 @@ namespace MaktabTaha.Application.Features.moshavereh.Command.Update
     public class UpdateMoshaverehCommand : IRequest<OperationResult<UpdateMoshaverehDTO>>
     {
         public string CaseNumber { get; set; }
+        public DateTime MoshaverehDate { get; set; }
         public string ClientRequestDescription { get; set; }
         public string MoshaverCode { get; set; }
         public string MoshaverIdea { get; set; }

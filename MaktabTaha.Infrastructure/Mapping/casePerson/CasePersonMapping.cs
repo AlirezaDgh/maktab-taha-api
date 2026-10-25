@@ -19,21 +19,21 @@ namespace MaktabTaha.Infrastructure.Mapping.casePerson
             builder.HasOne(x => x.Case)
                 .WithMany(x => x.CasePersons)
                 .HasForeignKey(x => x.CaseId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             builder.Property(x => x.PersonId);
             builder.HasOne(x => x.Person)
                 .WithMany(x => x.CasePersons)
                 .HasForeignKey(x => x.PersonId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             builder.Property(x => x.RelationId);
             builder.HasOne(x => x.Relation)
                 .WithMany(x => x.CasePersons)
                 .HasForeignKey(x => x.RelationId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

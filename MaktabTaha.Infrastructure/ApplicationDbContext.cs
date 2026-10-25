@@ -44,6 +44,7 @@ namespace MaktabTaha.Infrastructure
         public DbSet<CasePerson> CasePerson { get; set; }
         public DbSet<Case> CaseBNF { get; set; }
         public DbSet<Moshavereh> Moshavereh { get; set; }
+        public DbSet<Tahghigh> Tahghigh { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

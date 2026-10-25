@@ -62,6 +62,12 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<int?>("PersonId1")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TahghighId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TahghighId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -76,6 +82,10 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasIndex("PersonId");
 
                     b.HasIndex("PersonId1");
+
+                    b.HasIndex("TahghighId");
+
+                    b.HasIndex("TahghighId1");
 
                     b.ToTable("Attachment");
                 });
@@ -1137,6 +1147,9 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("MoshaverehDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -1535,6 +1548,59 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.ToTable("RolePermissions", (string)null);
                 });
 
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.Tahghigh", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClientDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstMohagheghCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MohagheghDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MohagheghIdea")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MoshaverehId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecondMohagheghCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TahghighDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MoshaverehId");
+
+                    b.ToTable("Tahghigh");
+                });
+
             modelBuilder.Entity("MaktabTaha.Domain.Entites.User", b =>
                 {
                     b.Property<int>("Id")
@@ -1603,7 +1669,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasOne("MaktabTaha.Domain.Entites.Case", "Case")
                         .WithMany()
                         .HasForeignKey("CaseId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MaktabTaha.Domain.Entites.Case", null)
                         .WithMany("Attachments")
@@ -1616,17 +1682,28 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasOne("MaktabTaha.Domain.Entites.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MaktabTaha.Domain.Entites.Person", null)
                         .WithMany("Attachments")
                         .HasForeignKey("PersonId1");
+
+                    b.HasOne("MaktabTaha.Domain.Entites.Tahghigh", "Tahghigh")
+                        .WithMany()
+                        .HasForeignKey("TahghighId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("MaktabTaha.Domain.Entites.Tahghigh", null)
+                        .WithMany("Attachments")
+                        .HasForeignKey("TahghighId1");
 
                     b.Navigation("Case");
 
                     b.Navigation("Moshavereh");
 
                     b.Navigation("Person");
+
+                    b.Navigation("Tahghigh");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.BaseEntities.City", b =>
@@ -1728,19 +1805,19 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasOne("MaktabTaha.Domain.Entites.Case", "Case")
                         .WithMany("CasePersons")
                         .HasForeignKey("CaseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MaktabTaha.Domain.Entites.Person", "Person")
                         .WithMany("CasePersons")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Relation", "Relation")
                         .WithMany("CasePersons")
                         .HasForeignKey("RelationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Case");
@@ -1767,7 +1844,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasOne("MaktabTaha.Domain.Entites.Permission", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Parent");
                 });
@@ -2005,12 +2082,23 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.Tahghigh", b =>
+                {
+                    b.HasOne("MaktabTaha.Domain.Entites.Moshavereh", "Moshavereh")
+                        .WithMany()
+                        .HasForeignKey("MoshaverehId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Moshavereh");
+                });
+
             modelBuilder.Entity("MaktabTaha.Domain.Entites.User", b =>
                 {
                     b.HasOne("MaktabTaha.Domain.Entites.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Role");
@@ -2059,6 +2147,11 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("RolePermissions");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.Tahghigh", b =>
+                {
+                    b.Navigation("Attachments");
                 });
 #pragma warning restore 612, 618
         }

@@ -15,6 +15,8 @@ namespace MaktabTaha.Infrastructure.Mapping.moshavereh
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.MoshaverehDate);
+
             builder.Property(x => x.CaseNumber);
             builder.HasOne(x => x.Case)
                 .WithMany(x => x.Moshaverehs)

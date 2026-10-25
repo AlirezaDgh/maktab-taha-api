@@ -41,6 +41,7 @@ using MaktabTaha.Application.Features.moshavereh.Command.Update;
 using MaktabTaha.Application.DTO_s.Moshavereh.Single;
 using MaktabTaha.Application.DTO_s.Moshavereh.Update;
 using MaktabTaha.Application.Features.caseDesc.Query.Single;
+using MaktabTaha.Application.Features.tahghigh.Command.Create;
 
 namespace MaktabTaha.Application.Profiles
 {
@@ -185,6 +186,10 @@ namespace MaktabTaha.Application.Profiles
                 .ForMember(dest => dest.Id,
                             opt => opt.MapFrom(src => src.Id));
             CreateMap<Moshavereh, UpdateMoshaverehDTO>();
+
+
+            // Tahgigh
+            CreateMap<CreateTahghighCommand, Tahghigh>();
         }
     }
 }

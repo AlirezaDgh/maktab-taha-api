@@ -135,7 +135,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                 column: "CaseId",
                 principalTable: "CaseBNF",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Attachment_CaseBNF_CaseId1",
@@ -229,7 +229,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                 column: "CaseId",
                 principalTable: "CaseBNF",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_CasePerson_CaseBNF_CaseId1",
@@ -367,7 +367,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                 column: "CaseId",
                 principalTable: "CaseDesc",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Attachment_CaseDesc_CaseId1",
@@ -461,7 +461,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                 column: "CaseId",
                 principalTable: "CaseDesc",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_CasePerson_CaseDesc_CaseId1",

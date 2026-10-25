@@ -9,7 +9,7 @@
         public class UpdateMoshaverehDTO
         {
             public int Id { get; set; }
-            public DateTime CreatedDate { get; set; }
+            public DateTime MoshaverehDate { get; set; }
             public string CaseNumber { get; set; }
             public string ClientRequestDescription { get; set; }
             public string MoshaverCode { get; set; }
