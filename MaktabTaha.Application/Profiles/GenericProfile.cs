@@ -42,6 +42,8 @@ using MaktabTaha.Application.DTO_s.Moshavereh.Single;
 using MaktabTaha.Application.DTO_s.Moshavereh.Update;
 using MaktabTaha.Application.Features.caseDesc.Query.Single;
 using MaktabTaha.Application.Features.tahghigh.Command.Create;
+using MaktabTaha.Application.Features.tahghigh.Command.Update;
+using MaktabTaha.Application.DTO_s.tahghigh.Update;
 
 namespace MaktabTaha.Application.Profiles
 {
@@ -179,17 +181,23 @@ namespace MaktabTaha.Application.Profiles
 
             // Moshavereh
             CreateMap<CreateMoshaverehcCommand, Moshavereh>();
-            CreateMap<UpdateMoshaverehCommand, Moshavereh>();
             CreateMap<Moshavereh, MoshaverehSingleDTO>()
                 .ForMember(dest => dest.MoshaverehDate,
                             opt => opt.MapFrom(src => src.CreatedDate))
                 .ForMember(dest => dest.Id,
                             opt => opt.MapFrom(src => src.Id));
+            CreateMap<UpdateMoshaverehCommand, Moshavereh>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.MoshaverehDate, opt => opt.Ignore());
             CreateMap<Moshavereh, UpdateMoshaverehDTO>();
 
 
             // Tahgigh
             CreateMap<CreateTahghighCommand, Tahghigh>();
+            CreateMap<UpdateTahghighCommand, Tahghigh>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.TahghighDate, opt => opt.Ignore());
+            CreateMap<Tahghigh, UpdateTahghighDTO>();
         }
     }
 }

@@ -14,6 +14,6 @@ namespace MaktabTaha.Application.Interfaces
         Task<bool> Exists(Expression<Func<T, bool>> expression);
         Task<T> FirstOrDefault(Expression<Func<T, bool>> expression);
         Task<T> SingleOrDefault(Expression<Func<T, bool>> expression);
-
+        Task<T> FirstOrDefaultWithTrack(Expression<Func<T, bool>> expression);
     }
 }

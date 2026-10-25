@@ -65,6 +65,11 @@ namespace MaktabTaha.Infrastructure.Repositories
                 .FirstOrDefaultAsync(expression);
         }
 
+        public async Task<T> FirstOrDefaultWithTrack(Expression<Func<T, bool>> expression)
+        {
+            return await _context.Set<T>()
+                .FirstOrDefaultAsync(expression);
+        }
 
         public async Task<T> Update(T entity)
         {

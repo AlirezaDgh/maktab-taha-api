@@ -36,6 +36,7 @@ namespace MaktabTaha.Application.Features.moshavereh.Command.Update
 
 
             _mapper.Map(request, moshavereh);
+            moshavereh.UpdatedDate = DateTime.UtcNow;
             await _repository.Update(moshavereh);
 
             var mappedData = _mapper.Map<UpdateMoshaverehDTO>(moshavereh);

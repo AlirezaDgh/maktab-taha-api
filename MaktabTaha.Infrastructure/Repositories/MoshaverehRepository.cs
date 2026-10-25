@@ -31,7 +31,7 @@ namespace MaktabTaha.Infrastructure.Repositories
         public async Task<List<MoshaverehListDTO>> SearchMoshaverehList(MoshaverehSearchDTO filters)
         {
             var query = _context.Moshavereh
-                .Where(x => x.Case.CaseStageId == 1)
+                .Where(x => x.Case.CaseStageId == 2)
                 .AsNoTracking()
                 .AsQueryable();
 

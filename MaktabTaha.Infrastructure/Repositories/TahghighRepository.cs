@@ -16,5 +16,13 @@ namespace MaktabTaha.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public async Task<Tahghigh> FirstOrDefaultWith(string caseNumber)
+        {
+            return await _context.Tahghigh
+                .Include(x => x.Moshavereh)
+                .ThenInclude(x => x.Case)
+                .FirstOrDefaultAsync(x => x.Moshavereh.Case.CaseNumber == caseNumber);
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace MaktabTaha.Application.Interfaces.Repositories
 {
     public interface ITahghighRepository : IGenericRepository<int, Tahghigh>
     {
+        Task<Tahghigh> FirstOrDefaultWith(string caseNumber);
     }
 }
