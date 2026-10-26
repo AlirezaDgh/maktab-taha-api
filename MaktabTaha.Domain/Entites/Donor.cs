@@ -15,11 +15,15 @@ namespace MaktabTaha.Domain.Entites
         // جدول خیرین و معرف و محقق
         public string Firstname { get; set; }
         public string Lastname { get; set; } 
-        public string FatherName { get; set; } 
+        public string FatherName { get; set; }
+        public string NickName { get; set; }
         public string NationalCode { get; set; }
         public string ShenasnamehNumber { get; set; }
         public DateTime BirthDate { get; set; }
-        public string BirthPlace { get; set; }
+        public int BirthProvinceId { get; set; }
+        public Province BirthProvince { get; set; }
+        public int BirthCityId { get; set; }
+        public City BirthCity { get; set; }
         public int NationalityId { get; set; }
         public Nationality Nationality { get; set; }
         public int GenderId { get; set; }
@@ -28,7 +32,8 @@ namespace MaktabTaha.Domain.Entites
         public MaritalStatus MaritalStatus { get; set; }
         public Religon Religon { get; set; }
         public int ReligonId { get; set; }
-        public string DonorType { get; set; }
+        public int DonorTypeId { get; set; }
+        public DonorType DonorType { get; set; }
         public int JobId { get; set; }
         public Job Job { get; set; }
         public int EducationLevelId { get; set; }
@@ -53,7 +58,8 @@ namespace MaktabTaha.Domain.Entites
         public int ReferrerId { get; set; }
         public Donor Referrer { get; set; }
         // نحوه آشنایی با خیریه
-        public string CharityReferralSource { get; set; }
+        public int CharityReferralSourceId { get; set; }
+        public CharityReferralSource CharityReferralSource { get; set; }
         // خدمات قابل ارائه
         public string AvailableServices { get; set; }
     }

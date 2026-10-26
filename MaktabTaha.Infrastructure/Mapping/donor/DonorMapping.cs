@@ -19,10 +19,23 @@ namespace MaktabTaha.Infrastructure.Mapping.donor
             builder.Property(x => x.Firstname);
             builder.Property(x => x.Lastname);
             builder.Property(x => x.FatherName);
+            builder.Property(x => x.NickName);
             builder.Property(x => x.NationalCode);
             builder.Property(x => x.ShenasnamehNumber);
             builder.Property(x => x.BirthDate);
-            builder.Property(x => x.BirthPlace);
+
+            builder.Property(x => x.BirthProvinceId);
+            builder.HasOne(x => x.BirthProvince)
+                .WithMany()
+                .HasForeignKey(x => x.BirthProvinceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(x => x.BirthCityId);
+            builder.HasOne(x => x.BirthCity)
+                .WithMany()
+                .HasForeignKey(x => x.BirthCityId)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             builder.Property(x => x.NationalityId);
             builder.HasOne(x => x.Nationality)
@@ -48,7 +61,11 @@ namespace MaktabTaha.Infrastructure.Mapping.donor
                 .HasForeignKey(x => x.ReligonId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Property(x => x.DonorType);
+            builder.Property(x => x.DonorTypeId);
+            builder.HasOne(x => x.DonorType)
+                .WithMany()
+                .HasForeignKey(x => x.DonorTypeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.JobId);
             builder.HasOne(x => x.Job)
@@ -103,7 +120,12 @@ namespace MaktabTaha.Infrastructure.Mapping.donor
                 .HasForeignKey(x => x.ReferrerId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Property(x => x.CharityReferralSource);
+            builder.Property(x => x.CharityReferralSourceId);
+            builder.HasOne(x => x.CharityReferralSource)
+                .WithMany()
+                .HasForeignKey(x => x.CharityReferralSourceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             builder.Property(x => x.AvailableServices);
         }
     }

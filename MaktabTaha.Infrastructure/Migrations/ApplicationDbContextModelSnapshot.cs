@@ -240,6 +240,35 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.ToTable("CharityMainRole");
                 });
 
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.BaseEntities.CharityReferralSource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CharityReferralSourceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CharityReferralSource");
+                });
+
             modelBuilder.Entity("MaktabTaha.Domain.Entites.BaseEntities.City", b =>
                 {
                     b.Property<int>("Id")
@@ -307,6 +336,35 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DependancyStatus");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.BaseEntities.DonorType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DonorTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DonorType");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.BaseEntities.EducationLevel", b =>
@@ -1083,12 +1141,14 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BirthCityId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("BirthPlace")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BirthProvinceId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CharityJoinDate")
                         .HasColumnType("datetime2");
@@ -1096,16 +1156,14 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<int>("CharityMainRoleId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CharityReferralSource")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CharityReferralSourceId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DonorType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DonorTypeId")
+                        .HasColumnType("int");
 
                     b.Property<int>("EducationLevelId")
                         .HasColumnType("int");
@@ -1181,6 +1239,10 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<int>("NationalityId")
                         .HasColumnType("int");
 
+                    b.Property<string>("NickName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ReferrerId")
                         .HasColumnType("int");
 
@@ -1196,7 +1258,15 @@ namespace MaktabTaha.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BirthCityId");
+
+                    b.HasIndex("BirthProvinceId");
+
                     b.HasIndex("CharityMainRoleId");
+
+                    b.HasIndex("CharityReferralSourceId");
+
+                    b.HasIndex("DonorTypeId");
 
                     b.HasIndex("EducationLevelId");
 
@@ -1947,9 +2017,33 @@ namespace MaktabTaha.Infrastructure.Migrations
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Donor", b =>
                 {
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.City", "BirthCity")
+                        .WithMany()
+                        .HasForeignKey("BirthCityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Province", "BirthProvince")
+                        .WithMany()
+                        .HasForeignKey("BirthProvinceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.CharityMainRole", "CharityMainRole")
                         .WithMany()
                         .HasForeignKey("CharityMainRoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.CharityReferralSource", "CharityReferralSource")
+                        .WithMany()
+                        .HasForeignKey("CharityReferralSourceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.DonorType", "DonorType")
+                        .WithMany()
+                        .HasForeignKey("DonorTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -2013,7 +2107,15 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("BirthCity");
+
+                    b.Navigation("BirthProvince");
+
                     b.Navigation("CharityMainRole");
+
+                    b.Navigation("CharityReferralSource");
+
+                    b.Navigation("DonorType");
 
                     b.Navigation("EducationLevel");
 
