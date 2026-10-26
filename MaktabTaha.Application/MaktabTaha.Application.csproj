@@ -129,6 +129,8 @@
     <Folder Include="Features\baseEntities\unemploymentReason\Command\Delete\" />
     <Folder Include="Features\baseEntities\unemploymentReason\Command\Update\" />
     <Folder Include="Features\baseEntities\unemploymentReason\Query\Single\" />
+    <Folder Include="Features\donor\Query\List\" />
+    <Folder Include="Features\donor\Query\Single\" />
   </ItemGroup>
 
 </Project>
