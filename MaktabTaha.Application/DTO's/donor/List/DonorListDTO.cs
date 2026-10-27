@@ -10,6 +10,7 @@ namespace MaktabTaha.Application.DTO_s.donor.List
 {
     public class DonorListDTO
     {
+        public int Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string FatherName { get; set; }

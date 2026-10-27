@@ -47,6 +47,8 @@ using MaktabTaha.Application.DTO_s.tahghigh.Update;
 using MaktabTaha.Application.DTO_s.tahghigh.Single;
 using MaktabTaha.Application.Features.donor.Command.Create;
 using MaktabTaha.Application.Features.donor.Command.Update;
+using MaktabTaha.Application.Features.donor.Query.Single;
+using MaktabTaha.Application.DTO_s.donor.Single;
 
 namespace MaktabTaha.Application.Profiles
 {
@@ -206,6 +208,7 @@ namespace MaktabTaha.Application.Profiles
             // Donor
             CreateMap<CreateDonorCommand, Donor>();
             CreateMap<UpdateDonorCommand, Donor>();
+            CreateMap<Donor, DonorSingleDTO>();
 
         }
     }

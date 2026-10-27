@@ -68,6 +68,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new DonorListDTO
                 {
+                    Id = x.Id,
                     Firstname = x.Firstname,
                     Lastname = x.Lastname,
                     FatherName = x.FatherName,
