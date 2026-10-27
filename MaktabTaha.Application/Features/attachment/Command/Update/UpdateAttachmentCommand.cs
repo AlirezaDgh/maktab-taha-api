@@ -12,11 +12,13 @@ namespace MaktabTaha.Application.Features.attachment.Command.Update
 {
     public class UpdateAttachmentCommand : IRequest<OperationResult<Attachments>>
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string? AttachmentName { get; set; }
         public IFormFile? Attach { get; set; }
         public int? PersonId { get; set; }
-        public int CaseId { get; set; }
-        public int MoshaverehId { get; set; }
+        public int? CaseId { get; set; }
+        public int? MoshaverehId { get; set; }
+        public int? TahghighId { get; set; }
+        public int? DonorId { get; set; }
     }
 }

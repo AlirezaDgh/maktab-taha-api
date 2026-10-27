@@ -11,8 +11,10 @@ namespace MaktabTaha.Application.DTO_s.attachment.Single
         public int Id { get; set; }
         public string AttachmentType { get; set; }
         public byte[] Attach { get; set; }
-        public int PersonId { get; set; }
-        public int CaseId { get; set; }
-        public int MoshaverehId { get; set; }
+        public int? PersonId { get; set; }
+        public int? CaseId { get; set; }
+        public int? MoshaverehId { get; set; }
+        public int? TahghighId { get; set; }
+        public int? DonorId { get; set; }
     }
 }
