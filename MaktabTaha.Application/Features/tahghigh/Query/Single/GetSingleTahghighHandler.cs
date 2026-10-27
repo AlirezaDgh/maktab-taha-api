@@ -30,6 +30,7 @@ namespace MaktabTaha.Application.Features.tahghigh.Query.Single
                 var tahghigh = await _repository.GetTahghighSingle(request.Id);
                 if (tahghigh == null) return operation.Failure("تحقیق یافت نشد");
 
+                var mappedData = _mapper.Map<TahghighSingleDTO>(tahghigh);
                 return operation.Succedded(tahghigh);
             }
             catch (Exception ex)

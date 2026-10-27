@@ -25,9 +25,17 @@ namespace MaktabTaha.Infrastructure.Mapping.tahghigh
 
             builder.Property(x => x.ClientDescription);
 
-            builder.Property(x => x.FirstMohagheghCode);
+            builder.Property(x => x.FirstMohagheghId);
+            builder.HasOne(x => x.FirstMohaghegh)
+                .WithMany()
+                .HasForeignKey(x => x.FirstMohagheghId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Property(x => x.SecondMohagheghCode);
+            builder.Property(x => x.SecondMohagheghId);
+            builder.HasOne(x => x.SecondMohaghegh)
+                .WithMany()
+                .HasForeignKey(x => x.SecondMohagheghId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             // enum نظر محقق
             builder.Property(x => x.MohagheghIdea).HasConversion<string>();

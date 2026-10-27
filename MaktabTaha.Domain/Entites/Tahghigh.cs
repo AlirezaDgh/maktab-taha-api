@@ -18,8 +18,10 @@ namespace MaktabTaha.Domain.Entites
         public Moshavereh Moshavereh { get; set; }
 
         public string ClientDescription { get; set; }
-        public string FirstMohagheghCode { get; set; }
-        public string SecondMohagheghCode { get; set; }
+        public int FirstMohagheghId { get; set; }
+        public Donor FirstMohaghegh { get; set; }
+        public int SecondMohagheghId { get; set; }
+        public Donor SecondMohaghegh { get; set; }
 
         public MohagheghIdea MohagheghIdea { get; set; }
         public string MohagheghDescription { get; set; }

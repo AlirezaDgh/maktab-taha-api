@@ -1744,9 +1744,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstMohagheghCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("FirstMohagheghId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -1765,9 +1764,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<int>("MoshaverehId")
                         .HasColumnType("int");
 
-                    b.Property<string>("SecondMohagheghCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SecondMohagheghId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("TahghighDate")
                         .HasColumnType("datetime2");
@@ -1777,7 +1775,11 @@ namespace MaktabTaha.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FirstMohagheghId");
+
                     b.HasIndex("MoshaverehId");
+
+                    b.HasIndex("SecondMohagheghId");
 
                     b.ToTable("Tahghigh");
                 });
@@ -2395,13 +2397,29 @@ namespace MaktabTaha.Infrastructure.Migrations
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Tahghigh", b =>
                 {
+                    b.HasOne("MaktabTaha.Domain.Entites.Donor", "FirstMohaghegh")
+                        .WithMany()
+                        .HasForeignKey("FirstMohagheghId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("MaktabTaha.Domain.Entites.Moshavereh", "Moshavereh")
                         .WithMany()
                         .HasForeignKey("MoshaverehId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MaktabTaha.Domain.Entites.Donor", "SecondMohaghegh")
+                        .WithMany()
+                        .HasForeignKey("SecondMohagheghId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("FirstMohaghegh");
+
                     b.Navigation("Moshavereh");
+
+                    b.Navigation("SecondMohaghegh");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.User", b =>

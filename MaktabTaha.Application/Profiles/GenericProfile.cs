@@ -49,6 +49,8 @@ using MaktabTaha.Application.Features.donor.Command.Create;
 using MaktabTaha.Application.Features.donor.Command.Update;
 using MaktabTaha.Application.Features.donor.Query.Single;
 using MaktabTaha.Application.DTO_s.donor.Single;
+using MaktabTaha.Application.DTO_s.tahghigh.List;
+using System.Xml.Serialization;
 
 namespace MaktabTaha.Application.Profiles
 {
@@ -203,6 +205,15 @@ namespace MaktabTaha.Application.Profiles
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.TahghighDate, opt => opt.Ignore());
             CreateMap<Tahghigh, UpdateTahghighDTO>();
+            CreateMap<Tahghigh, TahghighSingleDTO>()
+                .ForMember(dest => dest.FirstMohagheghName,
+                           opt => opt.MapFrom(src => src.FirstMohaghegh != null
+                           ? $"{src.FirstMohaghegh.Firstname} {src.FirstMohaghegh.Lastname}"
+                           : null))
+                .ForMember(dest => dest.SecondMohagheghName,
+                           opt => opt.MapFrom(src => src.SecondMohaghegh != null
+                           ? $"{src.SecondMohaghegh.Firstname} {src.SecondMohaghegh.Lastname}"
+                           : null)); 
 
 
             // Donor

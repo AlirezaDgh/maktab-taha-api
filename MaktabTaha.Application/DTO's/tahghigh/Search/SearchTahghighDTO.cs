@@ -11,6 +11,6 @@ namespace MaktabTaha.Application.DTO_s.tahghigh.Search
         public string? CaseNumber { get; set; }
         public string? SupervisorFirstName { get; set; }
         public string? SupervisorLastName { get; set; }
-        public string? FirstMohagheghCode { get; set; }
+        public int? FirstMohagheghId { get; set; }
     }
 }

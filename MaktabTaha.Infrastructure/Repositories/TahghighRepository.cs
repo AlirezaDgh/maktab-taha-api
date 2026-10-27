@@ -62,11 +62,9 @@ namespace MaktabTaha.Infrastructure.Repositories
 
             }
 
-            if (!string.IsNullOrWhiteSpace(filters.FirstMohagheghCode))
+            if (filters.FirstMohagheghId.HasValue)
             {
-                var firstMohagheghCode = filters.FirstMohagheghCode.Trim();
-                query = query.Where(x => x.FirstMohagheghCode != null &&
-                                    x.FirstMohagheghCode.Contains(firstMohagheghCode));
+                query = query.Where(x => x.FirstMohagheghId == filters.FirstMohagheghId);
             }
 
             return await query
@@ -106,8 +104,8 @@ namespace MaktabTaha.Infrastructure.Repositories
                     TahghighDate = x.TahghighDate,
                     CaseNumber = x.Moshavereh.CaseNumber,
                     ClientDescription = x.ClientDescription,
-                    FirstMohagheghCode = x.FirstMohagheghCode,
-                    SecondMohagheghCode = x.SecondMohagheghCode,
+                    FirstMohagheghId = x.FirstMohagheghId,
+                    SecondMohagheghId = x.SecondMohagheghId,
                     MohagheghIdea = x.MohagheghIdea,
                     MohagheghDescription = x.MohagheghDescription
                 }).FirstOrDefaultAsync();
