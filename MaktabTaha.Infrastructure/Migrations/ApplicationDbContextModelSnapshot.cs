@@ -1316,13 +1316,12 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("MoshaverCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MoshaverExplaination")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MoshaverId")
+                        .HasColumnType("int");
 
                     b.Property<string>("MoshaverIdea")
                         .IsRequired()
@@ -1337,6 +1336,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CaseNumber");
+
+                    b.HasIndex("MoshaverId");
 
                     b.ToTable("Moshavereh");
                 });
@@ -2149,7 +2150,15 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MaktabTaha.Domain.Entites.Donor", "Moshaver")
+                        .WithMany()
+                        .HasForeignKey("MoshaverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("Case");
+
+                    b.Navigation("Moshaver");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Permission", b =>

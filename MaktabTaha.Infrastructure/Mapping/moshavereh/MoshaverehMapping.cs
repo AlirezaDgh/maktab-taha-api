@@ -26,7 +26,11 @@ namespace MaktabTaha.Infrastructure.Mapping.moshavereh
 
             builder.Property(x => x.ClientRequestDescription);
 
-            builder.Property(X => X.MoshaverCode);
+            builder.Property(x => x.MoshaverId);
+            builder.HasOne(x => x.Moshaver)
+                .WithMany()
+                .HasForeignKey(x => x.MoshaverId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.MoshaverIdea);
             builder.Property(x => x.MoshaverExplaination);

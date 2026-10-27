@@ -58,11 +58,9 @@ namespace MaktabTaha.Infrastructure.Repositories
                                                            x.Person.LastName.Contains(lastName)));
             }
 
-            if (!string.IsNullOrWhiteSpace(filters.MoshaverCode))
+            if (filters.MoshaverId.HasValue)
             {
-                var moshaverCode = filters.MoshaverCode.Trim();
-                query = query.Where(x => x.MoshaverCode != null &&
-                                    x.MoshaverCode.Contains(moshaverCode));
+                query = query.Where(x => x.MoshaverId == filters.MoshaverId.Value);
             }
 
             return await query

@@ -12,7 +12,7 @@
             public DateTime MoshaverehDate { get; set; }
             public string CaseNumber { get; set; }
             public string ClientRequestDescription { get; set; }
-            public string MoshaverCode { get; set; }
+            public int MoshaverId { get; set; }
             public string MoshaverIdea { get; set; }
             public string MoshaverExplaination { get; set; }
         }

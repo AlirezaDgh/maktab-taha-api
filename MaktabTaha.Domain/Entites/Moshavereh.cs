@@ -20,7 +20,8 @@ namespace MaktabTaha.Domain.Entites
         [JsonIgnore]
         public Case Case { get; set; }
         public string ClientRequestDescription { get; set; }
-        public string MoshaverCode { get; set; }
+        public int MoshaverId { get; set; }
+        public Donor Moshaver { get; set; }
         public string MoshaverIdea { get; set; }
         public string MoshaverExplaination { get; set; }
         public List<Attachments> Attachments { get; set; } = new List<Attachments>();

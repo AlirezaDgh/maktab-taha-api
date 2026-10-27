@@ -64,7 +64,7 @@ namespace MaktabTaha.Infrastructure.Repositories
 
             if (filters.FirstMohagheghId.HasValue)
             {
-                query = query.Where(x => x.FirstMohagheghId == filters.FirstMohagheghId);
+                query = query.Where(x => x.FirstMohagheghId == filters.FirstMohagheghId.Value);
             }
 
             return await query

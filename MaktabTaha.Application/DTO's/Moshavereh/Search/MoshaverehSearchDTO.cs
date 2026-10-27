@@ -12,7 +12,7 @@ namespace MaktabTaha.Application.DTO_s.Moshavereh.Search
         public string? CaseNumber { get; set; }
         public string? SupervisorFirstName { get; set; }
         public string? SupervisorLastName { get; set; }
-        public string? MoshaverCode { get; set; }
+        public int? MoshaverId { get; set; }
 
         
     }
