@@ -41,6 +41,10 @@
     <Folder Include="Features\baseEntities\charityMainRole\Command\Delete\" />
     <Folder Include="Features\baseEntities\charityMainRole\Command\Update\" />
     <Folder Include="Features\baseEntities\charityMainRole\Query\Single\" />
+    <Folder Include="Features\baseEntities\charityReferralSource\Command\Create\" />
+    <Folder Include="Features\baseEntities\charityReferralSource\Command\Delete\" />
+    <Folder Include="Features\baseEntities\charityReferralSource\Command\Update\" />
+    <Folder Include="Features\baseEntities\charityReferralSource\Query\Single\" />
     <Folder Include="Features\baseEntities\city\Command\Create\" />
     <Folder Include="Features\baseEntities\city\Command\Delete\" />
     <Folder Include="Features\baseEntities\city\Command\Update\" />
@@ -49,6 +53,10 @@
     <Folder Include="Features\baseEntities\dependancyStatus\Command\Delete\" />
     <Folder Include="Features\baseEntities\dependancyStatus\Command\Update\" />
     <Folder Include="Features\baseEntities\dependancyStatus\Query\Single\" />
+    <Folder Include="Features\baseEntities\donorType\Command\Create\" />
+    <Folder Include="Features\baseEntities\donorType\Command\Delete\" />
+    <Folder Include="Features\baseEntities\donorType\Command\Update\" />
+    <Folder Include="Features\baseEntities\donorType\Query\Single\" />
     <Folder Include="Features\baseEntities\educationLevel\Command\Create\" />
     <Folder Include="Features\baseEntities\educationLevel\Command\Delete\" />
     <Folder Include="Features\baseEntities\educationLevel\Command\Update\" />
