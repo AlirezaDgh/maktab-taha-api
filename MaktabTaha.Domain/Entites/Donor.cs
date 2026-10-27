@@ -55,8 +55,8 @@ namespace MaktabTaha.Domain.Entites
         public int CharityMainRoleId { get; set; }
         public CharityMainRole CharityMainRole { get; set; }
         public DateTime CharityJoinDate { get; set; }
-        public int ReferrerId { get; set; }
-        public Donor Referrer { get; set; }
+        public int? ReferrerId { get; set; }
+        public Donor? Referrer { get; set; }
         // نحوه آشنایی با خیریه
         public int CharityReferralSourceId { get; set; }
         public CharityReferralSource CharityReferralSource { get; set; }

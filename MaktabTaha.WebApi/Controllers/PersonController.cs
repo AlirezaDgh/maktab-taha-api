@@ -14,7 +14,7 @@ namespace MaktabTaha.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PerosnController : BaseApiController
+    public class PersonController : BaseApiController
     {
         [HttpPost]
         public async Task<IActionResult> CreatePerson(CreatePersonCommand command)

@@ -42,7 +42,7 @@ namespace MaktabTaha.Application.Features.donor.Command.Create
         public string Email { get; set; }
         public int CharityMainRoleId { get; set; }
         public DateTime CharityJoinDate { get; set; }
-        public int ReferrerId { get; set; }
+        public int? ReferrerId { get; set; }
         // نحوه آشنایی با خیریه
         public int CharityReferralSourceId { get; set; }
         // خدمات قابل ارائه

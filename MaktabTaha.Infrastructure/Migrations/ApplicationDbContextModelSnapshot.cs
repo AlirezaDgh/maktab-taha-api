@@ -1243,7 +1243,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ReferrerId")
+                    b.Property<int?>("ReferrerId")
                         .HasColumnType("int");
 
                     b.Property<int>("ReligonId")
@@ -2101,8 +2101,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasOne("MaktabTaha.Domain.Entites.Donor", "Referrer")
                         .WithMany()
                         .HasForeignKey("ReferrerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.Religon", "Religon")
                         .WithMany()
