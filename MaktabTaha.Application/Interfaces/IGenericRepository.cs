@@ -7,6 +7,7 @@ namespace MaktabTaha.Application.Interfaces
         Task<T> Create(T entity);
         Task<T> CreateNoSave(T entity);
         Task<T> Update(T entity);
+        Task<T> UpdateNoSave(T entity);
         Task<T> Delete(T entity);
         Task<T> GetBy(TKey id);
         Task<List<T>> List();

@@ -86,5 +86,14 @@ namespace MaktabTaha.Infrastructure.Repositories
             await _context.Set<T>().AddAsync(entity);
             return entity;
         }
+
+        public async Task<T> UpdateNoSave(T entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            _context.Entry(entity).CurrentValues.SetValues(entity);
+
+
+            return entity;
+        }
     }
 }

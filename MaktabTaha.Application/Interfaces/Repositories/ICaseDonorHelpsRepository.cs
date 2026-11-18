@@ -1,4 +1,6 @@
-﻿using MaktabTaha.Domain.Entites;
+﻿using MaktabTaha.Application.DTO_s.caseDonorHelps.List;
+using MaktabTaha.Application.DTO_s.tasvib.TasvibDetails;
+using MaktabTaha.Domain.Entites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,6 @@ namespace MaktabTaha.Application.Interfaces.Repositories
 {
     public interface ICaseDonorHelpsRepository : IGenericRepository<int, CaseDonorHelps>
     {
+        Task<List<CaseDonorHelps>> GetAllCaseHelps(string caseNumber);
     }
 }

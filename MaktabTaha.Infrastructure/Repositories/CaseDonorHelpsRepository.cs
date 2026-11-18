@@ -1,4 +1,5 @@
-﻿using MaktabTaha.Application.Interfaces.Repositories;
+﻿using MaktabTaha.Application.DTO_s.caseDonorHelps.List;
+using MaktabTaha.Application.Interfaces.Repositories;
 using MaktabTaha.Domain.Entites;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +16,12 @@ namespace MaktabTaha.Infrastructure.Repositories
         public CaseDonorHelpsRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
+        }
+        public async Task<List<CaseDonorHelps>> GetAllCaseHelps(string caseNumber)
+        {
+            return await _context.CaseDonorHelps
+                .Where(x => x.CaseNumber == caseNumber)
+                .ToListAsync();
         }
     }
 }

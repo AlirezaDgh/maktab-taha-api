@@ -1,55 +1,59 @@
 ﻿using AutoMapper;
+using MaktabTaha.Application.DTO_s.caseDesc.Single;
+using MaktabTaha.Application.DTO_s.caseDonorHelps.Create;
+using MaktabTaha.Application.DTO_s.caseDonorHelps.List;
+using MaktabTaha.Application.DTO_s.casePerson.List;
+using MaktabTaha.Application.DTO_s.casePerson.Single;
+using MaktabTaha.Application.DTO_s.donor.Single;
+using MaktabTaha.Application.DTO_s.Moshavereh.Single;
+using MaktabTaha.Application.DTO_s.Moshavereh.Update;
+using MaktabTaha.Application.DTO_s.person.List;
+using MaktabTaha.Application.DTO_s.person.Search;
+using MaktabTaha.Application.DTO_s.person.Single;
 using MaktabTaha.Application.DTO_s.Requests.List;
+using MaktabTaha.Application.DTO_s.Requests.Single;
+using MaktabTaha.Application.DTO_s.tahghigh.Single;
+using MaktabTaha.Application.DTO_s.tahghigh.Update;
+using MaktabTaha.Application.DTO_s.tasvib.Update;
 using MaktabTaha.Application.DTO_s.users.list;
 using MaktabTaha.Application.DTO_s.users.single;
-using MaktabTaha.Application.Features.request.Command.Approve;
-using MaktabTaha.Application.Features.request.Command.Create;
-using MaktabTaha.Application.Features.request.Command.Update;
+using MaktabTaha.Application.Features.attachment.Command.Update;
+using MaktabTaha.Application.Features.attachment.Query.List;
+using MaktabTaha.Application.Features.attachment.Query.Single;
+using MaktabTaha.Application.Features.caseDesc.Command.Create;
+using MaktabTaha.Application.Features.caseDesc.Command.Update;
+using MaktabTaha.Application.Features.caseDonorHelps.Command.Create;
+using MaktabTaha.Application.Features.caseDonorHelps.Command.Update;
+using MaktabTaha.Application.Features.caseDonorHelps.Query.List;
+using MaktabTaha.Application.Features.casePerson.Command.Create;
+using MaktabTaha.Application.Features.casePerson.Command.Update;
+using MaktabTaha.Application.Features.donor.Command.Create;
+using MaktabTaha.Application.Features.donor.Command.Update;
+using MaktabTaha.Application.Features.moshavereh.Command.Create;
+using MaktabTaha.Application.Features.moshavereh.Command.Update;
 using MaktabTaha.Application.Features.permission.Command.Create;
 using MaktabTaha.Application.Features.permission.Command.Delete;
 using MaktabTaha.Application.Features.permission.Command.Update;
+using MaktabTaha.Application.Features.person.Command.Create;
+using MaktabTaha.Application.Features.person.Command.Update;
+using MaktabTaha.Application.Features.request.Command.Approve;
+using MaktabTaha.Application.Features.request.Command.Create;
+using MaktabTaha.Application.Features.request.Command.Update;
 using MaktabTaha.Application.Features.role.Command.create;
 using MaktabTaha.Application.Features.role.Command.delete;
 using MaktabTaha.Application.Features.role.Command.update;
 using MaktabTaha.Application.Features.role_permission.Command.Create;
 using MaktabTaha.Application.Features.role_permission.Command.Delete;
 using MaktabTaha.Application.Features.role_permission.Command.Update;
+using MaktabTaha.Application.Features.tahghigh.Command.Create;
+using MaktabTaha.Application.Features.tahghigh.Command.Update;
+using MaktabTaha.Application.Features.tasvib.Command.Create;
+using MaktabTaha.Application.Features.tasvib.Command.Update;
 using MaktabTaha.Application.Features.user.Command.Create;
 using MaktabTaha.Application.Features.user.Command.delete;
 using MaktabTaha.Application.Features.user.Command.update;
 using MaktabTaha.Domain.Common;
 using MaktabTaha.Domain.Entites;
-using MaktabTaha.Application.DTO_s.Requests.Single;
-using MaktabTaha.Application.Features.person.Command.Create;
-using MaktabTaha.Application.Features.person.Command.Update;
-using MaktabTaha.Application.DTO_s.person.List;
-using MaktabTaha.Application.DTO_s.person.Single;
-using MaktabTaha.Application.Features.attachment.Command.Update;
-using MaktabTaha.Application.Features.attachment.Query.List;
-using MaktabTaha.Application.Features.attachment.Query.Single;
-using MaktabTaha.Application.Features.caseDesc.Command.Create;
-using MaktabTaha.Application.Features.caseDesc.Command.Update;
-using MaktabTaha.Application.DTO_s.caseDesc.Single;
-using MaktabTaha.Application.Features.casePerson.Command.Create;
-using MaktabTaha.Application.Features.casePerson.Command.Update;
-using MaktabTaha.Application.DTO_s.casePerson.List;
-using MaktabTaha.Application.DTO_s.casePerson.Single;
-using MaktabTaha.Application.DTO_s.person.Search;
-using MaktabTaha.Application.Features.moshavereh.Command.Create;
-using MaktabTaha.Application.Features.moshavereh.Command.Update;
-using MaktabTaha.Application.DTO_s.Moshavereh.Single;
-using MaktabTaha.Application.DTO_s.Moshavereh.Update;
-using MaktabTaha.Application.Features.tahghigh.Command.Create;
-using MaktabTaha.Application.Features.tahghigh.Command.Update;
-using MaktabTaha.Application.DTO_s.tahghigh.Update;
-using MaktabTaha.Application.DTO_s.tahghigh.Single;
-using MaktabTaha.Application.Features.donor.Command.Create;
-using MaktabTaha.Application.Features.donor.Command.Update;
-using MaktabTaha.Application.DTO_s.donor.Single;
-using MaktabTaha.Application.Features.tasvib.Command.Create;
-using MaktabTaha.Application.Features.tasvib.Command.Update;
-using MaktabTaha.Application.DTO_s.tasvib.Update;
-using MaktabTaha.Application.DTO_s.caseDonorHelps.Create;
 
 namespace MaktabTaha.Application.Profiles
 {
@@ -230,6 +234,10 @@ namespace MaktabTaha.Application.Profiles
 
             // DonorHelpsDTO
             CreateMap<CreateCaseDonorHelpsDTO, CaseDonorHelps>();
+            CreateMap<CreateCaseDonorHelpsCommand, CaseDonorHelps>();
+            CreateMap<UpdateCaseDonorHelpsCommand, CaseDonorHelps>()
+                .ForMember(dest => dest.CaseNumber, opt => opt.Ignore());
+            CreateMap<CaseDonorHelps, CaseDonorHelpsListDTO>();
         }
     }
 }

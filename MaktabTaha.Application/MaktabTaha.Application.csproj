@@ -19,10 +19,10 @@
   <ItemGroup>
     <Folder Include="DTO%27s\caseDesc\Create\" />
     <Folder Include="DTO%27s\caseDesc\Update\" />
-    <Folder Include="DTO%27s\caseDonorHelps\List\" />
     <Folder Include="DTO%27s\caseDonorHelps\Single\" />
     <Folder Include="DTO%27s\casePerson\Update\" />
     <Folder Include="DTO%27s\Moshavereh\Create\" />
+    <Folder Include="DTO%27s\onvaniPage\" />
     <Folder Include="Features\baseEntities\area\Command\Create\" />
     <Folder Include="Features\baseEntities\area\Command\Delete\" />
     <Folder Include="Features\baseEntities\area\Command\Update\" />

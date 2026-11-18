@@ -46,6 +46,13 @@ namespace MaktabTaha.Infrastructure.Mapping.attachment
                 .WithMany() 
                 .HasForeignKey(x => x.TasvibId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+
+            builder.Property(x => x.OnvaniPageId);
+            builder.HasOne(x => x.OnvaniPage)
+                .WithMany()
+                .HasForeignKey(x => x.OnvaniPageId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
