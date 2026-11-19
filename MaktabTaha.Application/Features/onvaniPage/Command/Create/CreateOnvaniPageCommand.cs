@@ -20,8 +20,5 @@ namespace MaktabTaha.Application.Features.onvaniPage.Command.Create
         public string MoshaverIdea { get; set; }
         public int HeadOfWorkingGroupId { get; set; }
         public int MoshaverId { get; set; }
-        public int TasvibStatusId { get; set; }
-        public string TasvibReason { get; set; }
-        public int ManagerTasvibStatusId { get; set; }
     }
 }

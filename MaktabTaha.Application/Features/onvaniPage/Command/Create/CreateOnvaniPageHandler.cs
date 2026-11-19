@@ -34,10 +34,9 @@ namespace MaktabTaha.Application.Features.onvaniPage.Command.Create
             //if (caseBnf.ActiveStatus != CaseActiveStatus.Active) return operation.Failure("پرونده فعال نمیباشد");
             if ((int)caseBnf.ActiveStatus != 1) return operation.Failure("پرونده فعال نمیباشد");
 
-            if (request.ManagerTasvibStatusId != 2) return operation.Failure("مدیرعامل تایید نکرده است");
 
             var mappedData = _mapper.Map<OnvaniPage>(request);
-            await _onvaniRepository.Create(mappedData);
+            await _onvaniRepository.Create(mappedData); 
             return operation.Succedded(mappedData);
         }
     }
