@@ -89,5 +89,48 @@ namespace MaktabTaha.Infrastructure.Repositories
                     MoshaverName = x.Moshaver.Firstname + x.Moshaver.Lastname
                 }).ToListAsync();
         }
+
+        public async Task<List<OnvaniPageBeforeManagerAcceptDTO>> GetOnvaniPagesBeforeManagerAcceptSearch(SearchOnvaniPageBeforeManagerAcceptDTO Filters)
+        {
+            var query = _context.OnvaniPage
+                .Where(x => x.ManagerTasvibStatusId == 1)
+                .AsNoTracking();
+
+            if (Filters.Id.HasValue)
+            {
+                query = query.Where(x => x.Id == Filters.Id.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(Filters.CaseNumber))
+            {
+                var caseNumber = Filters.CaseNumber.Trim();
+                query = query.Where(x => x.CaseNumber != null &&
+                                    x.CaseNumber.Contains(caseNumber));
+            }
+
+            if (Filters.FromDate.HasValue)
+            {
+                var fromDate = Filters.FromDate.Value.Date;
+                query = query.Where(x => x.RequestDate >= fromDate);
+            }
+
+            if (Filters.ToDate.HasValue)
+            {
+                var toDate = Filters.ToDate.Value.Date.AddDays(1);
+                query = query.Where(x => x.RequestDate < toDate);
+            }
+
+            return await query
+                .OrderByDescending(x => x.CreatedDate)
+                .Select(x => new OnvaniPageBeforeManagerAcceptDTO
+                {
+                    RequestDate = x.RequestDate,
+                    CaseNumber = x.CaseNumber,
+                    RequestTypeId = x.RequestTypeId,
+                    RequestTypeName = x.RequestType.RequestTypeName,
+                    MoshaverId = x.MoshaverId,
+                    MoshaverName = x.Moshaver.Firstname + x.Moshaver.Lastname
+                }).ToListAsync();
+        }
     }
 }

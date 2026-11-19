@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MaktabTaha.Application.Features.onvaniPage.Query.SingleForUpdate
 {
-    public class GetSingleOnvaniPageForUpdateHandler : IRequestHandler<GetSingleOnvaniPageForUpdateCommand, OperationResult<SingleOnvaniPageForUpdateDTO>>
+    public class GetSingleOnvaniPageForUpdateHandler : IRequestHandler<GetSingleOnvaniPageForUpdateCommand, OperationResult<SingleOnvaniPageForUpdateBeforeApprovalDTO>>
     {
         // جزئیات برای ویرایش
         private readonly IOnvaniPageRepository _repository;
@@ -23,14 +23,14 @@ namespace MaktabTaha.Application.Features.onvaniPage.Query.SingleForUpdate
             _mapper = mapper;
         }
 
-        public async Task<OperationResult<SingleOnvaniPageForUpdateDTO>> Handle(GetSingleOnvaniPageForUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<SingleOnvaniPageForUpdateBeforeApprovalDTO>> Handle(GetSingleOnvaniPageForUpdateCommand request, CancellationToken cancellationToken)
         {
-            var operation = new OperationResult<SingleOnvaniPageForUpdateDTO>();
+            var operation = new OperationResult<SingleOnvaniPageForUpdateBeforeApprovalDTO>();
 
             var onvaniPage = await _repository.FirstOrDefault(x => x.Id == request.Id);
             if (onvaniPage == null) return operation.Failure("برگه عنوانی یافت نشد");
 
-            var mappedData = _mapper.Map<SingleOnvaniPageForUpdateDTO>(onvaniPage);
+            var mappedData = _mapper.Map<SingleOnvaniPageForUpdateBeforeApprovalDTO>(onvaniPage);
             return operation.Succedded(mappedData);
         }
     }
