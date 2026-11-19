@@ -59,6 +59,9 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Property<int?>("MoshaverehId")
                         .HasColumnType("int");
 
+                    b.Property<int>("OnvaniPageId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("PersonId")
                         .HasColumnType("int");
 
@@ -86,6 +89,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.HasIndex("DonorId");
 
                     b.HasIndex("MoshaverehId");
+
+                    b.HasIndex("OnvaniPageId");
 
                     b.HasIndex("PersonId");
 
@@ -1492,6 +1497,87 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.ToTable("Moshavereh");
                 });
 
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.OnvaniPage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApproveDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CaseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreateDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HeadOfWorkingGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("HelpMoney")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ManagerTasvibStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<int>("MoshaverId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MoshaverIdea")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RequestTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TasvibReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TasvibStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseNumber");
+
+                    b.HasIndex("HeadOfWorkingGroupId");
+
+                    b.HasIndex("ManagerTasvibStatusId");
+
+                    b.HasIndex("MoshaverId");
+
+                    b.HasIndex("RequestTypeId")
+                        .IsUnique();
+
+                    b.HasIndex("TasvibStatusId");
+
+                    b.ToTable("OnvaniPage");
+                });
+
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Permission", b =>
                 {
                     b.Property<int>("Id")
@@ -2091,6 +2177,12 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .WithMany("Attachments")
                         .HasForeignKey("MoshaverehId");
 
+                    b.HasOne("MaktabTaha.Domain.Entites.OnvaniPage", "OnvaniPage")
+                        .WithMany()
+                        .HasForeignKey("OnvaniPageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("MaktabTaha.Domain.Entites.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
@@ -2119,6 +2211,8 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Donor");
 
                     b.Navigation("Moshavereh");
+
+                    b.Navigation("OnvaniPage");
 
                     b.Navigation("Person");
 
@@ -2424,6 +2518,56 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Case");
 
                     b.Navigation("Moshaver");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.OnvaniPage", b =>
+                {
+                    b.HasOne("MaktabTaha.Domain.Entites.Case", "Case")
+                        .WithMany()
+                        .HasForeignKey("CaseNumber")
+                        .HasPrincipalKey("CaseNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.Donor", "HeadOfWorkingGroup")
+                        .WithMany()
+                        .HasForeignKey("HeadOfWorkingGroupId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.ManagerTasvibStatus", "ManagerTasvibStatus")
+                        .WithMany()
+                        .HasForeignKey("ManagerTasvibStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MaktabTaha.Domain.Entites.Donor", "Moshaver")
+                        .WithMany()
+                        .HasForeignKey("MoshaverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.RequestType", "RequestType")
+                        .WithOne()
+                        .HasForeignKey("MaktabTaha.Domain.Entites.OnvaniPage", "RequestTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.TasvibStatus", "TasvibStatus")
+                        .WithMany()
+                        .HasForeignKey("TasvibStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Case");
+
+                    b.Navigation("HeadOfWorkingGroup");
+
+                    b.Navigation("ManagerTasvibStatus");
+
+                    b.Navigation("Moshaver");
+
+                    b.Navigation("RequestType");
+
+                    b.Navigation("TasvibStatus");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Permission", b =>

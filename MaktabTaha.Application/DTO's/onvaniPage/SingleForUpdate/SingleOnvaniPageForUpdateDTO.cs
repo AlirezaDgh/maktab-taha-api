@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MaktabTaha.Application.DTO_s.onvaniPage.SingleForUpdate
 {
-    public class SingleOnvaniPageForUpdateBeforeApprovalDTO
+    public class SingleOnvaniPageForUpdateDTO
     {
         public int Id { get; set; }
         public DateTime RequestDate { get; set; }

@@ -17,7 +17,7 @@ namespace MaktabTaha.Application.Features.onvaniPage.Query.ListBeforeManagerAcce
             _repository = repository;
         }
 
-        public async Task<OperationResult<List<OnvaniPageBeforeManagerAcceptDTO>>> IRequestHandler<GetOnvaniPageListBeforeManagerAcceptCommand, OperationResult<List<OnvaniPageBeforeManagerAcceptDTO>>>.Handle(GetOnvaniPageListBeforeManagerAcceptCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<List<OnvaniPageBeforeManagerAcceptDTO>>> Handle(GetOnvaniPageListBeforeManagerAcceptCommand request, CancellationToken cancellationToken)
         {
             var operation = new OperationResult<List<OnvaniPageBeforeManagerAcceptDTO>>();
             var onvaniPages = await _repository.GetOnvaniPagesBeforeManagerAcceptSearch(request.Filters);

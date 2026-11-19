@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MaktabTaha.Application.Features.onvaniPage.Query.SingleForUpdate
 {
-    public class GetSingleOnvaniPageForUpdateCommand : IRequest<OperationResult<SingleOnvaniPageForUpdateBeforeApprovalDTO>>
+    public class GetSingleOnvaniPageForUpdateCommand : IRequest<OperationResult<SingleOnvaniPageForUpdateDTO>>
     {
         public int Id { get; set; }
     }

@@ -38,13 +38,13 @@ namespace MaktabTaha.Infrastructure.Mapping.onvaniPage
             builder.HasOne(x => x.HeadOfWorkingGroup)
                 .WithMany()
                 .HasForeignKey(x => x.HeadOfWorkingGroupId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.MoshaverId);
             builder.HasOne(x => x.Moshaver)
                 .WithMany()
                 .HasForeignKey(x => x.MoshaverId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.TasvibStatusId).HasDefaultValue(1);
             builder.HasOne(x => x.TasvibStatus)
