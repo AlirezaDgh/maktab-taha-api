@@ -23,7 +23,7 @@ namespace MaktabTaha.Domain.Entites
         public Donor? Donor { get; set; }
         public int? TasvibId { get; set; }
         public Tasvib? Tasvib { get; set; }
-        public CaseDonorHelps OnvaniPage { get; set; }
+        public CaseDonorHelpsTasvib OnvaniPage { get; set; }
         public int OnvaniPageId { get; set; }
     }
 }

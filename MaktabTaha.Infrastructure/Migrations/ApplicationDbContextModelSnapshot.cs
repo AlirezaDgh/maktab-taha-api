@@ -1186,7 +1186,62 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.ToTable("CaseBNF");
                 });
 
-            modelBuilder.Entity("MaktabTaha.Domain.Entites.CaseDonorHelps", b =>
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.CaseDonorHelpsOnvani", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CaseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DonorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FromDate")
+                        .HasColumnType("Date");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("MoneyAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("OnvaniPageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequestTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ToDate")
+                        .HasColumnType("Date");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseNumber");
+
+                    b.HasIndex("DonorId");
+
+                    b.HasIndex("OnvaniPageId");
+
+                    b.HasIndex("RequestTypeId");
+
+                    b.ToTable("CaseDonorHelpsOnvani");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.CaseDonorHelpsTasvib", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1238,7 +1293,7 @@ namespace MaktabTaha.Infrastructure.Migrations
 
                     b.HasIndex("TasvibId");
 
-                    b.ToTable("CaseDonorHelps");
+                    b.ToTable("CaseDonorHelpsTasvib");
                 });
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.CasePerson", b =>
@@ -2177,7 +2232,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .WithMany("Attachments")
                         .HasForeignKey("MoshaverehId");
 
-                    b.HasOne("MaktabTaha.Domain.Entites.OnvaniPage", "OnvaniPage")
+                    b.HasOne("MaktabTaha.Domain.Entites.CaseDonorHelpsTasvib", "OnvaniPage")
                         .WithMany()
                         .HasForeignKey("OnvaniPageId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -2315,7 +2370,43 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("MaktabTaha.Domain.Entites.CaseDonorHelps", b =>
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.CaseDonorHelpsOnvani", b =>
+                {
+                    b.HasOne("MaktabTaha.Domain.Entites.Case", "Case")
+                        .WithMany()
+                        .HasForeignKey("CaseNumber")
+                        .HasPrincipalKey("CaseNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.Donor", "Donor")
+                        .WithMany()
+                        .HasForeignKey("DonorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.OnvaniPage", "OnvaniPage")
+                        .WithMany("CaseDonorHelpsOnvani")
+                        .HasForeignKey("OnvaniPageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MaktabTaha.Domain.Entites.BaseEntities.RequestType", "RequestType")
+                        .WithMany()
+                        .HasForeignKey("RequestTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Case");
+
+                    b.Navigation("Donor");
+
+                    b.Navigation("OnvaniPage");
+
+                    b.Navigation("RequestType");
+                });
+
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.CaseDonorHelpsTasvib", b =>
                 {
                     b.HasOne("MaktabTaha.Domain.Entites.Case", "Case")
                         .WithMany()
@@ -2337,7 +2428,7 @@ namespace MaktabTaha.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("MaktabTaha.Domain.Entites.Tasvib", "Tasvib")
-                        .WithMany("CaseDonorHelps")
+                        .WithMany("CaseDonorHelpsTasvib")
                         .HasForeignKey("TasvibId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2938,6 +3029,11 @@ namespace MaktabTaha.Infrastructure.Migrations
                     b.Navigation("Attachments");
                 });
 
+            modelBuilder.Entity("MaktabTaha.Domain.Entites.OnvaniPage", b =>
+                {
+                    b.Navigation("CaseDonorHelpsOnvani");
+                });
+
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Permission", b =>
                 {
                     b.Navigation("Children");
@@ -2966,7 +3062,7 @@ namespace MaktabTaha.Infrastructure.Migrations
 
             modelBuilder.Entity("MaktabTaha.Domain.Entites.Tasvib", b =>
                 {
-                    b.Navigation("CaseDonorHelps");
+                    b.Navigation("CaseDonorHelpsTasvib");
                 });
 #pragma warning restore 612, 618
         }

@@ -233,11 +233,11 @@ namespace MaktabTaha.Application.Profiles
 
 
             // DonorHelpsDTO
-            CreateMap<CreateCaseDonorHelpsDTO, CaseDonorHelps>();
-            CreateMap<CreateCaseDonorHelpsForTasvibCommand, CaseDonorHelps>();
-            CreateMap<UpdateCaseDonorHelpsCommand, CaseDonorHelps>()
+            CreateMap<CreateCaseDonorHelpsTasvibDTO, CaseDonorHelpsTasvib>();
+            CreateMap<CreateCaseDonorHelpsForTasvibCommand, CaseDonorHelpsTasvib>();
+            CreateMap<UpdateCaseDonorHelpsCommand, CaseDonorHelpsTasvib>()
                 .ForMember(dest => dest.CaseNumber, opt => opt.Ignore());
-            CreateMap<CaseDonorHelps, CaseDonorHelpsListDTO>();
+            CreateMap<CaseDonorHelpsTasvib, CaseDonorHelpsTasvibListDTO>();
         }
     }
 }

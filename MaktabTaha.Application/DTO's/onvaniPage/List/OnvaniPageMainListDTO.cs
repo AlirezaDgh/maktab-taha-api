@@ -8,11 +8,8 @@ namespace MaktabTaha.Application.DTO_s.onvaniPage.List
 {
     public class OnvaniPageMainListDTO
     {
-
-    }
-
-    public class CaseOnvaniPageListHeaderDTO
-    {
+        // هدر اطلاعات
+        public string CaseNumber { get; set; }
         public string SupervisorFirstName { get; set; }
         public string SupervisorLastName { get; set; }
         public int PrivatenessStatusId { get; set; }
@@ -21,6 +18,11 @@ namespace MaktabTaha.Application.DTO_s.onvaniPage.List
         public string HouseHeadStatusName { get; set; }
         public int CaseStageId { get; set; }
         public string CaseStageDesc { get; set; }
+        
+        // سایر اطلاعات
+        public List<ApprovedOnvaniPageDTO> ApprovedOnvaniPageDTOs { get; set; } = new List<ApprovedOnvaniPageDTO>();
+        public List<CaseDonorHelpsOnvaniDTO> CaseDonorHelpsOnvaniDTOs { get; set; } = new List<CaseDonorHelpsOnvaniDTO>();
+        public List<CaseDonorHelpsOnvaniSummaryDTO> CaseDonorHelpsOnvaniSummaryDTOs { get; set; } = new List<CaseDonorHelpsOnvaniSummaryDTO>();
     }
 
     public class ApprovedOnvaniPageDTO
@@ -32,5 +34,21 @@ namespace MaktabTaha.Application.DTO_s.onvaniPage.List
 
     }
 
-    //public class CaseDonorHelps
+    public class CaseDonorHelpsOnvaniDTO
+    {
+        public int RequestTypeId { get; set; }
+        public string RequestTypeName { get; set; }
+        public decimal MoneyAmount { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+    }
+
+    public class CaseDonorHelpsOnvaniSummaryDTO
+    {
+        public int RequestTypeId { get; set; }
+        public string RequestTypeName { get; set; }
+        public decimal TotalMoneyAmount { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+    }
 }

@@ -10,5 +10,7 @@ namespace MaktabTaha.Application.Interfaces.Repositories
         Task<List<OnvaniPageBeforeApprovalDTO>> GetOnvaniPagesBeforeApprovalSearch(SearchOnvaniPageBeforeApprovalDTO Filters);
         Task<List<OnvaniPageBeforeManagerAcceptDTO>> GetOnvaniPagesBeforeManagerAcceptSearch(SearchOnvaniPageBeforeManagerAcceptDTO Filters);
         Task<SingleOnvaniPageDTO> GetOnvaniPageDetails(int id);
+
+        Task<OnvaniPageMainListDTO> GetOnvaniPageMainList(string CaseNumber);
     }
 }

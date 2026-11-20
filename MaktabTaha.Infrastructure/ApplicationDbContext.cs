@@ -48,10 +48,11 @@ namespace MaktabTaha.Infrastructure
         public DbSet<Tahghigh> Tahghigh { get; set; }
         public DbSet<Donor> Donor { get; set; }
         public DbSet<Tasvib> Tasvib { get; set; }
-        public DbSet<CaseDonorHelps> CaseDonorHelps { get; set; }
+        public DbSet<CaseDonorHelpsTasvib> CaseDonorHelpsTasvib { get; set; }
         public DbSet<TasvibStatus> TasvibStatus { get; set; }
         public DbSet<ManagerTasvibStatus> ManagerTasvibStatus { get; set; }
         public DbSet<OnvaniPage> OnvaniPage { get; set; }
+        public DbSet<CaseDonorHelpsOnvani> CaseDonorHelpsOnvani { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

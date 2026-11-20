@@ -15,9 +15,9 @@ namespace MaktabTaha.Application.Features.tasvib.Command.Create
         private readonly ICaseRepository _caseRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ICaseDonorHelpsRepository _caseDonorHelpsRepository;
+        private readonly ICaseDonorHelpsTasvibRepository _caseDonorHelpsRepository;
 
-        public CreateTasvibHandler(ITasvibRepository tasvibRepository, ICaseRepository caseRepository, IMapper mapper, IUnitOfWork unitOfWork, ICaseDonorHelpsRepository caseDonorHelpsRepository)
+        public CreateTasvibHandler(ITasvibRepository tasvibRepository, ICaseRepository caseRepository, IMapper mapper, IUnitOfWork unitOfWork, ICaseDonorHelpsTasvibRepository caseDonorHelpsRepository)
         {
             _tasvibRepository = tasvibRepository;
             _caseRepository = caseRepository;
@@ -45,7 +45,7 @@ namespace MaktabTaha.Application.Features.tasvib.Command.Create
 
                         foreach (var item in request.CaseDonorHelps)
                         {
-                            var caseDonorHelps = new CaseDonorHelps
+                            var caseDonorHelps = new CaseDonorHelpsTasvib
                             {
                                 TasvibId = mappedData.Id,
                                 CaseNumber = item.CaseNumber,

@@ -16,7 +16,7 @@ namespace MaktabTaha.Domain.Entites
         public int? TasvibId { get; set; }
         public Tasvib? Tasvib { get; set; }
         public int? OnvaniPageId { get; set; }
-        public CaseDonorHelps? OnvaniPage { get; set; }
+        public CaseDonorHelpsTasvib? OnvaniPage { get; set; }
         public string CaseNumber { get; set; }
         public Case Case { get; set; }
         public decimal MonthlyMoneyAmount { get; set; }

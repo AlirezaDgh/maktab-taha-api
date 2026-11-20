@@ -32,7 +32,8 @@ namespace MaktabTaha.Domain.Entites
         //وضعیت تایید مدیر
         public int ManagerTasvibStatusId { get; set; }
         public ManagerTasvibStatus ManagerTasvibStatus { get; set; }
-        public List<CaseDonorHelps> CaseDonorHelps { get; set; } = new List<CaseDonorHelps>();
+        [JsonIgnore]
+        public List<CaseDonorHelpsTasvib> CaseDonorHelpsTasvib { get; set; } = new List<CaseDonorHelpsTasvib>();
     }
 
     

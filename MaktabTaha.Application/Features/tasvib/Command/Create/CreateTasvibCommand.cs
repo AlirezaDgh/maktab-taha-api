@@ -26,6 +26,6 @@ namespace MaktabTaha.Application.Features.tasvib.Command.Create
         //وضعیت تایید مدیر
         public int ManagerTasvibStatusId { get; set; }
 
-        public List<CreateCaseDonorHelpsDTO> CaseDonorHelps { get; set; } = new List<CreateCaseDonorHelpsDTO>();
+        public List<CreateCaseDonorHelpsTasvibDTO> CaseDonorHelps { get; set; } = new List<CreateCaseDonorHelpsTasvibDTO>();
     }
 }

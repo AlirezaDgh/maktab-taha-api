@@ -47,6 +47,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 }).FirstOrDefaultAsync();
         }
 
+
         public async Task<List<OnvaniPageBeforeApprovalDTO>> GetOnvaniPagesBeforeApprovalSearch(SearchOnvaniPageBeforeApprovalDTO Filters)
         {
             var query = _context.OnvaniPage
@@ -131,6 +132,33 @@ namespace MaktabTaha.Infrastructure.Repositories
                     MoshaverId = x.MoshaverId,
                     MoshaverName = x.Moshaver.Firstname + x.Moshaver.Lastname
                 }).ToListAsync();
+        }
+
+
+
+        public async Task<OnvaniPageMainListDTO> GetOnvaniPageMainList(string CaseNumber)
+        {
+            return await (
+                from o in _context.OnvaniPage.AsNoTracking()
+                where o.CaseNumber == CaseNumber
+
+                let Supervisor = o.Case.CasePersons.Where(x => x.RelationId == 1).Select(x => x.Person)
+
+                select (new OnvaniPageMainListDTO
+                {
+                    CaseNumber = CaseNumber,
+                    SupervisorFirstName = Supervisor.Select(x => x.FirstName).FirstOrDefault(),
+                    SupervisorLastName = Supervisor.Select(x => x.LastName).FirstOrDefault(),
+                    PrivatenessStatusId = o.Case.PrivatenessStatusId,
+                    PrivatenessStatusName = o.Case.PrivatenessStatus.PrivatenessStatusName,
+                    HouseHeadStatusId = o.Case.HouseHeadStatusId,
+                    HouseHeadStatusName = o.Case.HouseHeadStatus.Name,
+                    CaseStageId = o.Case.CaseStageId,
+                    CaseStageDesc = o.Case.CaseStage.CaseStageDesc,
+
+                    //ApprovedOnvaniPageDTOs = 
+                })
+                );
         }
     }
 }

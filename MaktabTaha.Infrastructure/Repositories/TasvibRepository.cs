@@ -42,7 +42,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                     ManagerTasvibStatusId = x.ManagerTasvibStatusId,
                     ManagerTasvibStatusName = x.ManagerTasvibStatus.Title,
 
-                    CaseDonorHelpDetails = x.CaseDonorHelps.Select(x => new CaseDonorHelpDetailsDTO
+                    CaseDonorHelpDetails = x.CaseDonorHelpsTasvib.Select(x => new CaseDonorHelpDetailsDTO
                     {
                         RequestTypeId = x.RequestTypeId,
                         RequestTypeName = x.RequestType.RequestTypeName,
@@ -54,7 +54,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                     }).ToList(),
 
 
-                    CaseDonorHelpSummary = x.CaseDonorHelps.GroupBy(x => x.RequestTypeId)
+                    CaseDonorHelpSummary = x.CaseDonorHelpsTasvib.GroupBy(x => x.RequestTypeId)
                     .Select(y => new CaseDonorHelpSummaryDTO
                     {
                         RequestTypeId = y.Key,
