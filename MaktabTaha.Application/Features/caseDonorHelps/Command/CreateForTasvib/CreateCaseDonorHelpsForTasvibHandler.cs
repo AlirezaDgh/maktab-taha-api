@@ -6,19 +6,21 @@ using MediatR;
 
 namespace MaktabTaha.Application.Features.caseDonorHelps.Command.Create
 {
-    public class CreateCaseDonorHelpsHandler : IRequestHandler<CreateCaseDonorHelpsCommand, OperationResult<CaseDonorHelps>>
+    // کمک های خیرین به پرونده در مرحله تصویب پرونده
+
+    public class CreateCaseDonorHelpsForTasvibHandler : IRequestHandler<CreateCaseDonorHelpsForTasvibCommand, OperationResult<CaseDonorHelps>>
     {
         private readonly ICaseDonorHelpsRepository _caseDonorHelpsRepository;
         private readonly IMapper _mapper;
         private readonly ITasvibRepository _tasvibRepository;
-        public CreateCaseDonorHelpsHandler(ICaseDonorHelpsRepository caseDonorHelpsRepository, IMapper mapper, ITasvibRepository tasvibRepository)
+        public CreateCaseDonorHelpsForTasvibHandler(ICaseDonorHelpsRepository caseDonorHelpsRepository, IMapper mapper, ITasvibRepository tasvibRepository)
         {
             _caseDonorHelpsRepository = caseDonorHelpsRepository;
             _mapper = mapper;
             _tasvibRepository = tasvibRepository;
         }
 
-        public async Task<OperationResult<CaseDonorHelps>> Handle(CreateCaseDonorHelpsCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<CaseDonorHelps>> Handle(CreateCaseDonorHelpsForTasvibCommand request, CancellationToken cancellationToken)
         {
             var operation = new OperationResult<CaseDonorHelps>();
             var tasvib = await _tasvibRepository.FirstOrDefaultWith(request.CaseNumber);

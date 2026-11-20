@@ -21,6 +21,15 @@ namespace MaktabTaha.Infrastructure.Mapping.caseDonorHelps
                 .HasForeignKey(x => x.TasvibId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
+            builder.Property(x => x.OnvaniPageId);
+            builder.HasOne(x => x.OnvaniPage)
+                .WithMany()
+                .HasForeignKey(x => x.OnvaniPageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
             builder.Property(x => x.CaseNumber);
             builder.HasOne(x => x.Case)
                 .WithMany()

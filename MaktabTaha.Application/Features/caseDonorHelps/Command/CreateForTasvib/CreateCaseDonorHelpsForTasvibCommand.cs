@@ -4,8 +4,9 @@ using MediatR;
 
 namespace MaktabTaha.Application.Features.caseDonorHelps.Command.Create
 {
-    public class CreateCaseDonorHelpsCommand : IRequest<OperationResult<CaseDonorHelps>>
+    public class CreateCaseDonorHelpsForTasvibCommand : IRequest<OperationResult<CaseDonorHelps>>
     {
+        // کمک های خیرین به پرونده در مرحله تصویب پرونده
         public int TasvibId { get; set; }
 
         public string CaseNumber { get; set; }

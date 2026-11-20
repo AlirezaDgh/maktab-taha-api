@@ -13,8 +13,11 @@ namespace MaktabTaha.Domain.Entites
     {
         // Id در BaseEntity موجود است.
 
-        public int TasvibId { get; set; }
-        public Tasvib Tasvib { get; set; }
+        public int? TasvibId { get; set; }
+        public Tasvib? Tasvib { get; set; }
+
+        public int? OnvaniPageId { get; set; }
+        public OnvaniPage? OnvaniPage { get; set; }
 
         public string CaseNumber { get; set; }
         public Case Case { get; set; }

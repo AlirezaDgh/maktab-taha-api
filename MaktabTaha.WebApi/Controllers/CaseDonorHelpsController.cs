@@ -12,7 +12,7 @@ namespace MaktabTaha.WebApi.Controllers
     public class CaseDonorHelpsController : BaseApiController
     {
         [HttpPost]
-        public async Task<IActionResult> CreateCaseDonorHelps(CreateCaseDonorHelpsCommand command)
+        public async Task<IActionResult> CreateCaseDonorHelps(CreateCaseDonorHelpsForTasvibCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
