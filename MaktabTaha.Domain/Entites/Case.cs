@@ -67,5 +67,9 @@ namespace MaktabTaha.Domain.Entites
         public List<Moshavereh> Moshaverehs { get; set; } = new List<Moshavereh>();
         [JsonIgnore]
         public List<Tasvib> Tasvibs { get; set; } = new List<Tasvib>();
+
+        [JsonIgnore]
+        public List<OnvaniPage> OnvaniPages { get; set; } = new List<OnvaniPage>();
+
     }
 }

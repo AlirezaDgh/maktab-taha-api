@@ -82,6 +82,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new OnvaniPageBeforeApprovalDTO
                 {
+                    Id = x.Id,
                     RequestDate = x.RequestDate,
                     CaseNumber = x.CaseNumber,
                     RequestTypeId = x.RequestTypeId,
@@ -125,6 +126,7 @@ namespace MaktabTaha.Infrastructure.Repositories
                 .OrderByDescending(x => x.CreatedDate)
                 .Select(x => new OnvaniPageBeforeManagerAcceptDTO
                 {
+                    Id = x.Id,
                     RequestDate = x.RequestDate,
                     CaseNumber = x.CaseNumber,
                     RequestTypeId = x.RequestTypeId,
@@ -139,26 +141,58 @@ namespace MaktabTaha.Infrastructure.Repositories
         public async Task<OnvaniPageMainListDTO> GetOnvaniPageMainList(string CaseNumber)
         {
             return await (
-                from o in _context.OnvaniPage.AsNoTracking()
-                where o.CaseNumber == CaseNumber
+                from c in _context.CaseBNF.AsNoTracking()
+                where c.CaseNumber == CaseNumber
 
-                let Supervisor = o.Case.CasePersons.Where(x => x.RelationId == 1).Select(x => x.Person)
+                let Supervisor = c.CasePersons.Where(x => x.RelationId == 1).Select(x => x.Person)
 
                 select (new OnvaniPageMainListDTO
                 {
                     CaseNumber = CaseNumber,
                     SupervisorFirstName = Supervisor.Select(x => x.FirstName).FirstOrDefault(),
                     SupervisorLastName = Supervisor.Select(x => x.LastName).FirstOrDefault(),
-                    PrivatenessStatusId = o.Case.PrivatenessStatusId,
-                    PrivatenessStatusName = o.Case.PrivatenessStatus.PrivatenessStatusName,
-                    HouseHeadStatusId = o.Case.HouseHeadStatusId,
-                    HouseHeadStatusName = o.Case.HouseHeadStatus.Name,
-                    CaseStageId = o.Case.CaseStageId,
-                    CaseStageDesc = o.Case.CaseStage.CaseStageDesc,
+                    PrivatenessStatusId = c.PrivatenessStatusId,
+                    PrivatenessStatusName = c.PrivatenessStatus.PrivatenessStatusName,
+                    HouseHeadStatusId = c.HouseHeadStatusId,
+                    HouseHeadStatusName = c.HouseHeadStatus.Name,
+                    CaseStageId = c.CaseStageId,
+                    CaseStageDesc = c.CaseStage.CaseStageDesc,
 
-                    //ApprovedOnvaniPageDTOs = 
+                    ApprovedOnvaniPageDTOs = c.OnvaniPages.Where(x => x.TasvibStatusId.HasValue).Select(x => new ApprovedOnvaniPageDTO
+                    {
+                        Id = x.Id,
+                        RequestDate = x.RequestDate,
+                        CaseNumber = x.CaseNumber,
+                        ClientRequestDescription = x.CreateDescription,
+                    }).ToList(),
+
+                    CaseDonorHelpsOnvaniDTOs = c.OnvaniPages.Where(x => x.TasvibStatusId.HasValue).SelectMany(x => x.CaseDonorHelpsOnvani)
+                                                                    .Select(x => new CaseDonorHelpsOnvaniDTO
+                                                                    {
+                                                                        RequestTypeId = x.RequestTypeId,
+                                                                        RequestTypeName = x.RequestType.RequestTypeName,
+                                                                        MoneyAmount = x.MoneyAmount,
+                                                                        FromDate = x.FromDate,
+                                                                        ToDate = x.ToDate
+                                                                    }).ToList(),
+
+                    CaseDonorHelpsOnvaniSummaryDTOs = c.OnvaniPages.Where(x => x.TasvibStatusId.HasValue).SelectMany(x => x.CaseDonorHelpsOnvani)
+                                .GroupBy(x => new
+                                {
+                                    x.RequestTypeId
+                                })
+                                .Select(y => new CaseDonorHelpsOnvaniSummaryDTO
+                                {
+                                    RequestTypeId = y.Key.RequestTypeId,
+                                    RequestTypeName = y.First().RequestType.RequestTypeName,
+                                    TotalMoneyAmount = y.Sum(x => x.MoneyAmount),
+                                    FromDate = y.First().FromDate,
+                                    ToDate = y.First().ToDate
+                                }).ToList()
+
+
                 })
-                );
+                ).FirstOrDefaultAsync();
         }
     }
 }

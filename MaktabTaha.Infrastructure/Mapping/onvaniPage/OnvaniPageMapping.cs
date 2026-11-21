@@ -19,7 +19,7 @@ namespace MaktabTaha.Infrastructure.Mapping.onvaniPage
 
             builder.Property(x => x.CaseNumber);
             builder.HasOne(x => x.Case)
-                .WithMany()
+                .WithMany(x => x.OnvaniPages)
                 .HasForeignKey(x => x.CaseNumber)
                 .HasPrincipalKey(x => x.CaseNumber)
                 .OnDelete(DeleteBehavior.Cascade);

@@ -7,7 +7,9 @@ using MaktabTaha.Application.Features.onvaniPage.Command.Update;
 using MaktabTaha.Application.Features.onvaniPage.Command.UpdateBeforeManagerAccept;
 using MaktabTaha.Application.Features.onvaniPage.Query.List;
 using MaktabTaha.Application.Features.onvaniPage.Query.ListBeforeManagerAccept;
+using MaktabTaha.Application.Features.onvaniPage.Query.MainList;
 using MaktabTaha.Application.Features.onvaniPage.Query.Single;
+using MaktabTaha.Application.Features.onvaniPage.Query.SingleForTasvib;
 using MaktabTaha.Application.Features.onvaniPage.Query.SingleForUpdate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -90,5 +92,20 @@ namespace MaktabTaha.WebApi.Controllers
         }
 
 
+        [HttpGet("{caseNumber}/GetMainList")]
+        public async Task<IActionResult> GetOnvaniPageMainList(string caseNumber)
+        {
+            // قرم نمایش برگه های عنوانی
+            
+            return Ok(await Mediator.Send(new GetOnvaniPageMainListCommand { CaseNumber = caseNumber }));
+        }
+
+        [HttpGet("{id}/Details/For-Tasvib")]
+        public async Task<IActionResult> GetSingleOnvaniPageForTasvib(int id)
+        {
+            // جزئیاتی که در فرم نمایش نوشته شده
+
+            return Ok(await Mediator.Send(new GetOnvaniPageSingleForTasvibCommand { Id = id }));
+        }
     }
 }

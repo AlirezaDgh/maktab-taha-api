@@ -32,6 +32,7 @@ namespace MaktabTaha.Application.Features.onvaniPage.Command.Create
             var caseBnf = await _caseRepository.FirstOrDefault(x => x.CaseNumber == request.CaseNumber);
 
             //if (caseBnf.ActiveStatus != CaseActiveStatus.Active) return operation.Failure("پرونده فعال نمیباشد");
+            if (caseBnf == null) return operation.Failure("پرونده موجود نمیباشد");
             if ((int)caseBnf.ActiveStatus != 1) return operation.Failure("پرونده فعال نمیباشد");
 
 

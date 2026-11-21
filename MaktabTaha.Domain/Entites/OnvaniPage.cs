@@ -1,8 +1,10 @@
 ﻿using MaktabTaha.Domain.Common;
 using MaktabTaha.Domain.Entites.BaseEntities;
+using MaktabTaha.Domain.Entites.BaseEntities.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -24,14 +26,15 @@ namespace MaktabTaha.Domain.Entites
         public Donor HeadOfWorkingGroup { get; set; }
         public int MoshaverId { get; set; }
         public Donor Moshaver { get; set; }
-        public int? TasvibStatusId { get; set; }
+        public int? TasvibStatusId { get; set; } 
         public TasvibStatus? TasvibStatus { get; set; }
         public string? TasvibReason { get; set; }
         public string? ApproveDescription { get; set; }
-        public int? ManagerTasvibStatusId { get; set; }
+        public int? ManagerTasvibStatusId { get; set; } 
         public ManagerTasvibStatus? ManagerTasvibStatus { get; set; }
 
         [JsonIgnore]
         public List<CaseDonorHelpsOnvani> CaseDonorHelpsOnvani { get; set; } = new List<CaseDonorHelpsOnvani>();
+
     }
 }

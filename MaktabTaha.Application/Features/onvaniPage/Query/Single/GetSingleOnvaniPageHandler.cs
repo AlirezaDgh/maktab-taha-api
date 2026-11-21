@@ -15,6 +15,12 @@ namespace MaktabTaha.Application.Features.onvaniPage.Query.Single
         // نمایش جزئیات
 
         private readonly IOnvaniPageRepository _repository;
+
+        public GetSingleOnvaniPageHandler(IOnvaniPageRepository repository)
+        {
+            _repository = repository;
+        }
+
         public async Task<OperationResult<SingleOnvaniPageDTO>> Handle(GetSingleOnvaniPageCommand request, CancellationToken cancellationToken)
         {
             var operation = new OperationResult<SingleOnvaniPageDTO>();

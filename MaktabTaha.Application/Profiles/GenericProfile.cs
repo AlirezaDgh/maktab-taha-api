@@ -2,11 +2,15 @@
 using MaktabTaha.Application.DTO_s.caseDesc.Single;
 using MaktabTaha.Application.DTO_s.caseDonorHelps.Create;
 using MaktabTaha.Application.DTO_s.caseDonorHelps.List;
+using MaktabTaha.Application.DTO_s.caseDonorHelpsOnvani.Create;
+using MaktabTaha.Application.DTO_s.caseDonorHelpsOnvani.List;
 using MaktabTaha.Application.DTO_s.casePerson.List;
 using MaktabTaha.Application.DTO_s.casePerson.Single;
 using MaktabTaha.Application.DTO_s.donor.Single;
 using MaktabTaha.Application.DTO_s.Moshavereh.Single;
 using MaktabTaha.Application.DTO_s.Moshavereh.Update;
+using MaktabTaha.Application.DTO_s.onvaniPage.SingleForTasvib;
+using MaktabTaha.Application.DTO_s.onvaniPage.SingleForUpdate;
 using MaktabTaha.Application.DTO_s.person.List;
 using MaktabTaha.Application.DTO_s.person.Search;
 using MaktabTaha.Application.DTO_s.person.Single;
@@ -25,12 +29,19 @@ using MaktabTaha.Application.Features.caseDesc.Command.Update;
 using MaktabTaha.Application.Features.caseDonorHelps.Command.Create;
 using MaktabTaha.Application.Features.caseDonorHelps.Command.Update;
 using MaktabTaha.Application.Features.caseDonorHelps.Query.List;
+using MaktabTaha.Application.Features.caseDonorHelpsOnvani.Command.Create;
+using MaktabTaha.Application.Features.caseDonorHelpsOnvani.Command.Update;
 using MaktabTaha.Application.Features.casePerson.Command.Create;
 using MaktabTaha.Application.Features.casePerson.Command.Update;
 using MaktabTaha.Application.Features.donor.Command.Create;
 using MaktabTaha.Application.Features.donor.Command.Update;
 using MaktabTaha.Application.Features.moshavereh.Command.Create;
 using MaktabTaha.Application.Features.moshavereh.Command.Update;
+using MaktabTaha.Application.Features.onvaniPage.Command.Approve;
+using MaktabTaha.Application.Features.onvaniPage.Command.Create;
+using MaktabTaha.Application.Features.onvaniPage.Command.ManagerAccept;
+using MaktabTaha.Application.Features.onvaniPage.Command.Update;
+using MaktabTaha.Application.Features.onvaniPage.Command.UpdateBeforeManagerAccept;
 using MaktabTaha.Application.Features.permission.Command.Create;
 using MaktabTaha.Application.Features.permission.Command.Delete;
 using MaktabTaha.Application.Features.permission.Command.Update;
@@ -232,12 +243,29 @@ namespace MaktabTaha.Application.Profiles
             CreateMap<Tasvib, UpdateTasvibDTO>();
 
 
-            // DonorHelpsDTO
+            // DonorHelpsTasvibDTO
             CreateMap<CreateCaseDonorHelpsTasvibDTO, CaseDonorHelpsTasvib>();
             CreateMap<CreateCaseDonorHelpsForTasvibCommand, CaseDonorHelpsTasvib>();
             CreateMap<UpdateCaseDonorHelpsCommand, CaseDonorHelpsTasvib>()
                 .ForMember(dest => dest.CaseNumber, opt => opt.Ignore());
             CreateMap<CaseDonorHelpsTasvib, CaseDonorHelpsTasvibListDTO>();
+
+
+            // OnvaniPage
+            CreateMap<CreateOnvaniPageCommand, OnvaniPage>();
+            CreateMap<ApproveOnvaniPageCommand, OnvaniPage>();
+            CreateMap<OnvaniPageManagerAcceptCommand, OnvaniPage>();
+            CreateMap<UpdateOnvaniPageCommand, OnvaniPage>();
+            CreateMap<UpdateBeforeManagerAcceptCommand, OnvaniPage>();
+            CreateMap<OnvaniPage, SingleOnvaniPageForUpdateDTO>();
+            CreateMap<OnvaniPage, OnvaniPageSingleForTasvibDTO>();
+
+            // DonorHelpsOnvaniDTO
+            CreateMap<CreateCaseDonorHelpsOnvaniDTO, CaseDonorHelpsOnvani>();
+            CreateMap<CreateCaseDonorHelpsOnvaniCommand, CaseDonorHelpsOnvani>();
+            CreateMap<UpdateCaseDonorHelpsOnvaniCommand, CaseDonorHelpsOnvani>();
+            CreateMap<CaseDonorHelpsOnvani, CaseDonorHelpsOnvaniListDTO>();
+
         }
     }
 }

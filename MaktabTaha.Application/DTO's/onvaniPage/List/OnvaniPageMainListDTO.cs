@@ -20,9 +20,9 @@ namespace MaktabTaha.Application.DTO_s.onvaniPage.List
         public string CaseStageDesc { get; set; }
         
         // سایر اطلاعات
-        public List<ApprovedOnvaniPageDTO> ApprovedOnvaniPageDTOs { get; set; } = new List<ApprovedOnvaniPageDTO>();
-        public List<CaseDonorHelpsOnvaniDTO> CaseDonorHelpsOnvaniDTOs { get; set; } = new List<CaseDonorHelpsOnvaniDTO>();
-        public List<CaseDonorHelpsOnvaniSummaryDTO> CaseDonorHelpsOnvaniSummaryDTOs { get; set; } = new List<CaseDonorHelpsOnvaniSummaryDTO>();
+        public List<ApprovedOnvaniPageDTO>? ApprovedOnvaniPageDTOs { get; set; } = new List<ApprovedOnvaniPageDTO>();
+        public List<CaseDonorHelpsOnvaniDTO>? CaseDonorHelpsOnvaniDTOs { get; set; } = new List<CaseDonorHelpsOnvaniDTO>();
+        public List<CaseDonorHelpsOnvaniSummaryDTO>? CaseDonorHelpsOnvaniSummaryDTOs { get; set; } = new List<CaseDonorHelpsOnvaniSummaryDTO>();
     }
 
     public class ApprovedOnvaniPageDTO

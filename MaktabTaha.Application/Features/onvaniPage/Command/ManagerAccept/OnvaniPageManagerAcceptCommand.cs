@@ -1,5 +1,6 @@
 ﻿using MaktabTaha.Application.Helpers;
 using MaktabTaha.Domain.Entites;
+using MaktabTaha.Domain.Entites.BaseEntities.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace MaktabTaha.Application.Features.onvaniPage.Command.ManagerAccept
     {
         public int Id { get; set; }
         public int ManagerTasvibStatusId { get; set; }
+
     }
 }

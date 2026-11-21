@@ -1,6 +1,7 @@
 ﻿using MaktabTaha.Application.Helpers;
 using MaktabTaha.Domain.Entites;
 using MaktabTaha.Domain.Entites.BaseEntities;
+using MaktabTaha.Domain.Entites.BaseEntities.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,10 @@ namespace MaktabTaha.Application.Features.onvaniPage.Command.Create
         public string CaseNumber { get; set; }
         public int RequestTypeId { get; set; }
         public decimal HelpMoney { get; set; }
-        public string Description { get; set; }
+        public string CreateDescription { get; set; }
         public string MoshaverIdea { get; set; }
         public int HeadOfWorkingGroupId { get; set; }
         public int MoshaverId { get; set; }
+
     }
 }

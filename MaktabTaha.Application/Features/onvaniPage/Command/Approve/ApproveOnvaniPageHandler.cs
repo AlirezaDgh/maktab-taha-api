@@ -25,7 +25,7 @@ namespace MaktabTaha.Application.Features.onvaniPage.Command.Approve
         public async Task<OperationResult<OnvaniPage>> Handle(ApproveOnvaniPageCommand request, CancellationToken cancellationToken)
         {
             var operation = new OperationResult<OnvaniPage>();
-            var onvaniPage = await _onvaniPageRepository.FirstOrDefault(x => x.Id == request.Id);
+            var onvaniPage = await _onvaniPageRepository.FirstOrDefaultWithTrack(x => x.Id == request.Id);
             if (onvaniPage == null) return operation.Failure("برگه عنوانی یافت نشد");
 
             try

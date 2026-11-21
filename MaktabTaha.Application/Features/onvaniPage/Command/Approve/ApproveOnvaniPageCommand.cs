@@ -12,7 +12,6 @@ namespace MaktabTaha.Application.Features.onvaniPage.Command.Approve
         public int TasvibStatusId { get; set; }
         public string TasvibReason { get; set; }
         public string ApproveDescription { get; set; }
-        public int ManagerTasvibStatusId { get; set; }
 
         public List<CreateCaseDonorHelpsOnvaniDTO> CaseDonorHelpsOnvani { get; set; } = new List<CreateCaseDonorHelpsOnvaniDTO>();
 
